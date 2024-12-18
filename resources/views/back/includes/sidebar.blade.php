@@ -33,7 +33,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-application-cog"></i>
+                        <i class="ri-home-line"></i>
                         <span>Ana Səhifə</span>
                     </a>
 
@@ -50,6 +50,13 @@
                     <a href="{{ route('admin.home-hero.index') }}" class="waves-effect">
                         <i class="ri-settings-2-line"></i>
                                 <span>Home Hero</span>
+                            </a>        
+                        </li>
+
+                        <li>
+                    <a href="{{ route('admin.home-cart.index') }}" class="waves-effect">
+                        <i class="ri-settings-2-line"></i>
+                                <span>Home Cart</span>
                             </a>        
                         </li>
 

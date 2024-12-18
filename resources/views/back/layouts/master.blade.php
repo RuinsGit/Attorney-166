@@ -34,19 +34,30 @@
     <!-- App Css-->
     <link href="{{ asset('back/assets/') }}/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     @stack('css')
+
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body data-topbar="dark">
+
+    <!-- <body data-layout="horizontal" data-topbar="dark"> -->
+
+    @include('back.includes.header')
+    @include('back.includes.sidebar')
     <!-- Begin page -->
     <div id="layout-wrapper">
-        @include('back.includes.header')
-        @include('back.includes.sidebar')
 
         <div class="main-content">
             @yield('content')
             @include('back.includes.footer')
         </div>
+        <!-- end main content-->
+
     </div>
+    <!-- END layout-wrapper -->
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
@@ -60,7 +71,10 @@
 
 
     <!-- apexcharts -->
-    <script src="{{ asset('back/assets/') }}/libs/apexcharts/apexcharts.min.js"></script>
+    @if(Route::currentRouteName() == 'admin.dashboard')
+        <script src="{{ asset('back/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+        <script src="{{ asset('back/assets/js/pages/dashboard.init.js') }}"></script>
+    @endif
 
     <!-- jquery.vectormap map -->
     <script src="{{ asset('back/assets/') }}/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js">
@@ -80,7 +94,14 @@
 
     <!-- App js -->
     <script src="{{ asset('back/assets/') }}/js/app.js"></script>
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- Toastr bildirimleri -->
+   
     @stack('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 </body>
 
 

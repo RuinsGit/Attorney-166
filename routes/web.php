@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\HeaderController;
 use App\Http\Controllers\Admin\HomeHeroController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Admin\SocialMediaController;
-
+use App\Http\Controllers\Admin\HomeCartController;
 
 
 
@@ -88,3 +88,18 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
 
 Route::post('/social/order', [SocialMediaController::class, 'order'])->name('admin.social.order');
 Route::post('/social/toggle-status/{id}', [SocialMediaController::class, 'toggleStatus'])->name('admin.social.toggle-status');
+
+
+// HomeCart rotaları
+Route::get('/home-cart', [HomeCartController::class, 'index'])->name('admin.home-cart.index');
+Route::get('/home-cart/create', [HomeCartController::class, 'create'])->name('admin.home-cart.create');
+Route::post('/home-cart', [HomeCartController::class, 'store'])->name('admin.home-cart.store');
+Route::get('/home-cart/{id}/edit', [HomeCartController::class, 'edit'])->name('admin.home-cart.edit');
+Route::put('/home-cart/{id}', [HomeCartController::class, 'update'])->name('admin.home-cart.update');
+Route::delete('/home-cart/{id}', [HomeCartController::class, 'destroy'])->name('admin.home-cart.destroy');
+Route::get('/home-cart/status/{id}', [HomeCartController::class, 'status'])->name('admin.home-cart.status');
+Route::post('/home-cart/order', [HomeCartController::class, 'order'])->name('admin.home-cart.order');
+
+
+
+
