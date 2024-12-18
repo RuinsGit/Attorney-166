@@ -54,6 +54,16 @@
                         </li>
 
                     </ul>
+                    <li>
+                        <a href="{{ route('admin.translations.index') }}" class="waves-effect">
+                            <i class="ri-translate"></i>
+                            <span>Tərcümələr</span>
+                        </a>
+                    </li>
+
+
+
+
                 </li>
             </ul>
         </div>

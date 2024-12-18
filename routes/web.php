@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeaderController;
 use App\Http\Controllers\Admin\HomeHeroController;
+use App\Http\Controllers\Admin\TranslationController;
 
 
 
@@ -61,4 +62,17 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     // HomeHero rotaları
     Route::get('/home-hero', [HomeHeroController::class, 'index'])->name('admin.home-hero.index');
     Route::put('/home-hero/update', [HomeHeroController::class, 'update'])->name('admin.home-hero.update');
+
+
+
+    // Translation rotaları
+    Route::resource('translations', TranslationController::class)->names([
+        'index' => 'admin.translations.index',
+        'create' => 'admin.translations.create',
+        'store' => 'admin.translations.store',
+        'show' => 'admin.translations.show',
+        'edit' => 'admin.translations.edit',
+        'update' => 'admin.translations.update',
+        'destroy' => 'admin.translations.destroy',
+    ]);
 });
