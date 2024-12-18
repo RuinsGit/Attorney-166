@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeaderController;
 use App\Http\Controllers\Admin\HomeHeroController;
 use App\Http\Controllers\Admin\TranslationController;
+use App\Http\Controllers\Admin\SocialMediaController;
 
 
 
@@ -75,4 +76,15 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
         'update' => 'admin.translations.update',
         'destroy' => 'admin.translations.destroy',
     ]);
+
+    // SocialMedia rotaları
+    Route::get('/social', [SocialMediaController::class, 'index'])->name('admin.social.index');
+    Route::get('/social/create', [SocialMediaController::class, 'create'])->name('admin.social.create');
+    Route::post('/social', [SocialMediaController::class, 'store'])->name('admin.social.store');
+    Route::get('/social/{id}/edit', [SocialMediaController::class, 'edit'])->name('admin.social.edit');
+    Route::put('/social/{id}', [SocialMediaController::class, 'update'])->name('admin.social.update');
+    Route::delete('/social/{id}', [SocialMediaController::class, 'destroy'])->name('admin.social.destroy'); 
 });
+
+Route::post('/social/order', [SocialMediaController::class, 'order'])->name('admin.social.order');
+Route::post('/social/toggle-status/{id}', [SocialMediaController::class, 'toggleStatus'])->name('admin.social.toggle-status');
