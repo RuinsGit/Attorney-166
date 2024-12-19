@@ -92,7 +92,7 @@
                     <li>
                         <a href="{{ route('admin.contact-message.index') }}" class="waves-effect">
                             <i class="ri-message-line"></i>
-                            <span>Müraciətlər</span>
+                            <span>Əlaqə müraciətləri</span>
                         </a>
                     </li>
 
