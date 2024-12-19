@@ -60,6 +60,13 @@
                             </a>        
                         </li>
 
+                        <li>
+                    <a href="{{ route('admin.home-includes.index') }}" class="waves-effect">
+                        <i class="ri-settings-2-line"></i>
+                                <span>Home Includes</span>
+                            </a>        
+                        </li>
+
                     </ul>
                     <li>
                         <a href="{{ route('admin.translations.index') }}" class="waves-effect">
@@ -72,6 +79,20 @@
                         <a href="{{ route('admin.social.index') }}" class="waves-effect">
                             <i class="ri-share-line"></i>
                             <span>Sosial Media</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('admin.comment.index') }}" class="waves-effect">
+                            <i class="ri-message-line"></i>
+                            <span>Rəylər</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('admin.contact-message.index') }}" class="waves-effect">
+                            <i class="ri-message-line"></i>
+                            <span>Müraciətlər</span>
                         </a>
                     </li>
 

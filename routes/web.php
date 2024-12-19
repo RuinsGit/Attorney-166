@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\HomeHeroController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\HomeCartController;
+use App\Http\Controllers\Admin\HomeIncludeController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\ContactMessageController;
 
 
 
@@ -64,8 +67,6 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     Route::get('/home-hero', [HomeHeroController::class, 'index'])->name('admin.home-hero.index');
     Route::put('/home-hero/update', [HomeHeroController::class, 'update'])->name('admin.home-hero.update');
 
-
-
     // Translation rotaları
     Route::resource('translations', TranslationController::class)->names([
         'index' => 'admin.translations.index',
@@ -77,6 +78,18 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
         'destroy' => 'admin.translations.destroy',
     ]);
 
+    // HomeIncludes routes
+    Route::get('/home-includes', [HomeIncludeController::class, 'index'])->name('admin.home-includes.index');
+    Route::get('/home-includes/create', [HomeIncludeController::class, 'create'])->name('admin.home-includes.create');
+    Route::post('/home-includes', [HomeIncludeController::class, 'store'])->name('admin.home-includes.store');
+    Route::get('/home-includes/{id}/edit', [HomeIncludeController::class, 'edit'])->name('admin.home-includes.edit');
+    Route::put('/home-includes/{id}', [HomeIncludeController::class, 'update'])->name('admin.home-includes.update');
+    Route::delete('/home-includes/{id}', [HomeIncludeController::class, 'destroy'])->name('admin.home-includes.destroy');
+    Route::get('/home-includes/status/{id}', [HomeIncludeController::class, 'status'])->name('admin.home-includes.status');
+    Route::post('/home-includes/order', [HomeIncludeController::class, 'order'])->name('admin.home-includes.order');
+    Route::post('/home-includes/toggle-status/{id}', [HomeIncludeController::class, 'toggleStatus'])->name('admin.home-includes.toggle-status');
+
+
     // SocialMedia rotaları
     Route::get('/social', [SocialMediaController::class, 'index'])->name('admin.social.index');
     Route::get('/social/create', [SocialMediaController::class, 'create'])->name('admin.social.create');
@@ -84,21 +97,49 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     Route::get('/social/{id}/edit', [SocialMediaController::class, 'edit'])->name('admin.social.edit');
     Route::put('/social/{id}', [SocialMediaController::class, 'update'])->name('admin.social.update');
     Route::delete('/social/{id}', [SocialMediaController::class, 'destroy'])->name('admin.social.destroy'); 
+
+    // HomeCart rotaları
+    Route::get('/home-cart', [HomeCartController::class, 'index'])->name('admin.home-cart.index');
+    Route::get('/home-cart/create', [HomeCartController::class, 'create'])->name('admin.home-cart.create');
+    Route::post('/home-cart', [HomeCartController::class, 'store'])->name('admin.home-cart.store');
+    Route::get('/home-cart/{id}/edit', [HomeCartController::class, 'edit'])->name('admin.home-cart.edit');
+    Route::put('/home-cart/{id}', [HomeCartController::class, 'update'])->name('admin.home-cart.update');
+    Route::delete('/home-cart/{id}', [HomeCartController::class, 'destroy'])->name('admin.home-cart.destroy');
+    Route::get('/home-cart/status/{id}', [HomeCartController::class, 'status'])->name('admin.home-cart.status');
+    Route::post('/home-cart/order', [HomeCartController::class, 'order'])->name('admin.home-cart.order');
+
+    // Comment rotaları
+    Route::get('/comment', [CommentController::class, 'index'])->name('admin.comment.index');
+    Route::get('/comment/create', [CommentController::class, 'create'])->name('admin.comment.create');
+    Route::post('/comment', [CommentController::class, 'store'])->name('admin.comment.store');
+    Route::get('/comment/{id}/edit', [CommentController::class, 'edit'])->name('admin.comment.edit');
+    Route::put('/comment/{id}', [CommentController::class, 'update'])->name('admin.comment.update');
+    Route::get('/comment/status/{id}', [CommentController::class, 'status'])->name('admin.comment.status');
+    Route::post('/comment/toggle-status/{id}', [CommentController::class, 'toggleStatus'])->name('admin.comment.toggle-status');
+    Route::get('/comment/destroy/{id}', [CommentController::class, 'destroy'])->name('admin.comment.destroy');
+
+    // ContactMessage rotaları
+    Route::get('/contact-message', [ContactMessageController::class, 'index'])->name('admin.contact-message.index');
+    Route::get('/contact-message/detail/{id}', [ContactMessageController::class, 'detail'])->name('admin.contact-message.detail');
+    Route::delete('/contact-message/{id}', [ContactMessageController::class, 'destroy'])->name('admin.contact-message.destroy');
+    Route::post('/contact-message/mark-as-read/{id}', [ContactMessageController::class, 'markAsRead'])->name('admin.contact-message.mark-as-read');
+    Route::post('/contact-message/order', [ContactMessageController::class, 'order'])->name('admin.contact-message.order');
+    Route::get('/contact-message/show/{id}', [ContactMessageController::class, 'show'])->name('admin.contact-message.show');
+    Route::get('/contact-message/detail/{id}', [ContactMessageController::class, 'detail'])->name('admin.contact-message.detail');
+
+
+
+    
+
+
+
+
+
+   
 });
 
 Route::post('/social/order', [SocialMediaController::class, 'order'])->name('admin.social.order');
 Route::post('/social/toggle-status/{id}', [SocialMediaController::class, 'toggleStatus'])->name('admin.social.toggle-status');
-
-
-// HomeCart rotaları
-Route::get('/home-cart', [HomeCartController::class, 'index'])->name('admin.home-cart.index');
-Route::get('/home-cart/create', [HomeCartController::class, 'create'])->name('admin.home-cart.create');
-Route::post('/home-cart', [HomeCartController::class, 'store'])->name('admin.home-cart.store');
-Route::get('/home-cart/{id}/edit', [HomeCartController::class, 'edit'])->name('admin.home-cart.edit');
-Route::put('/home-cart/{id}', [HomeCartController::class, 'update'])->name('admin.home-cart.update');
-Route::delete('/home-cart/{id}', [HomeCartController::class, 'destroy'])->name('admin.home-cart.destroy');
-Route::get('/home-cart/status/{id}', [HomeCartController::class, 'status'])->name('admin.home-cart.status');
-Route::post('/home-cart/order', [HomeCartController::class, 'order'])->name('admin.home-cart.order');
 
 
 
