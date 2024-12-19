@@ -4,6 +4,15 @@
 @section('content')
     <div class="page-content">
         <div class="container-fluid">
+            <!-- Flash Mesajları -->
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
+
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -23,11 +32,19 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="col-12">
-                                <div class="d-flex justify-content-end mb-4">
-                                    <a href="{{ route('admin.home-includes.create') }}" class="btn btn-primary">
-                                        <i class="fas fa-plus"></i> Yeni
-                                    </a>
-                                </div>
+                                @if($homeIncludes->count() == 1)
+                                    <div class="d-flex justify-content-end mb-4">
+                                        <a href="{{ route('admin.home-includes.edit', $homeIncludes->first()->id) }}" class="btn btn-warning">
+                                            <i class="fas fa-edit"></i> Redaktə Et
+                                        </a>
+                                    </div>
+                                @elseif($homeIncludes->count() < 1)
+                                    <div class="d-flex justify-content-end mb-4">
+                                        <a href="{{ route('admin.home-includes.create') }}" class="btn btn-primary">
+                                            <i class="fas fa-plus"></i> Yeni
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
 
                             @if($homeIncludes->count() > 0)
@@ -88,9 +105,16 @@
 
 @push('js')
     <script>
+        // Set up global AJAX settings for CSRF token
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        });
+
         function changeStatus(id) {
             $.ajax({
-                url: `{{ route('admin.home-includes.status', '') }}/${id}`,
+                url: `{{ route('admin.home-includes.status', ':id') }}`.replace(':id', id),
                 type: 'GET',
                 success: function(response) {
                     if(response.status === 'success') {
@@ -104,7 +128,22 @@
                                 window.location.reload();
                             }
                         });
+                    } else {
+                        Swal.fire({
+                            title: 'Xəta!',
+                            text: response.message || 'Status dəyişdirilə bilmədi.',
+                            icon: 'error',
+                            confirmButtonText: 'Bağla'
+                        });
                     }
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        title: 'Xəta!',
+                        text: 'Status dəyişdirilə bilmədi.',
+                        icon: 'error',
+                        confirmButtonText: 'Bağla'
+                    });
                 }
             });
         }
@@ -121,7 +160,38 @@
                 cancelButtonText: 'Xeyr'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = `{{ route('admin.home-includes.destroy', '') }}/${id}`;
+                    $.ajax({
+                        url: `{{ route('admin.home-includes.destroy', ':id') }}`.replace(':id', id),
+                        type: 'DELETE',
+                        success: function(response) {
+                            if(response.status === 'success') {
+                                Swal.fire({
+                                    title: 'Uğurlu!',
+                                    text: response.message,
+                                    icon: 'success',
+                                    confirmButtonText: 'Tamam'
+                                }).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Xəta!',
+                                    text: response.message || 'Silinmə əməliyyatı uğursuz oldu.',
+                                    icon: 'error',
+                                    confirmButtonText: 'Bağla'
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                title: 'Xəta!',
+                                text: 'Silinmə əməliyyatı zamanı xəta meydana gəldi.',
+                                icon: 'error',
+                                confirmButtonText: 'Bağla'
+                            });
+                            console.error('Silinmə xətası:', error);
+                        }
+                    });
                 }
             });
         }

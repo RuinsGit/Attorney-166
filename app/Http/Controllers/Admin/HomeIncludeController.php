@@ -16,11 +16,21 @@ class HomeIncludeController extends Controller
 
     public function create()
     {
+        if (HomeInclude::count() >= 1) {
+            return redirect()->route('admin.home-includes.index')
+                             ->with('error', 'Artıq bir qeyd mövcuddur. Yeni əlavə etmək mümkün deyil.');
+        }
+
         return view('admin.home-includes.create');
     }
 
     public function store(Request $request)
     {
+        if (HomeInclude::count() >= 1) {
+            return redirect()->route('admin.home-includes.index')
+                             ->with('error', 'Artıq bir qeyd mövcuddur. Yeni əlavə etmək mümkün deyil.');
+        }
+
         $request->validate([
             'name1_az' => 'required|string|max:255',
             'text1_az' => 'required|string|max:255',
