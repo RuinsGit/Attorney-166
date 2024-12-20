@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\HomeCartController;
 use App\Http\Controllers\Admin\HomeIncludeController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\ContactMessageDataController;
+use App\Http\Controllers\Admin\SubscribeController;
 
 
 
@@ -98,6 +100,9 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     Route::put('/social/{id}', [SocialMediaController::class, 'update'])->name('admin.social.update');
     Route::delete('/social/{id}', [SocialMediaController::class, 'destroy'])->name('admin.social.destroy'); 
 
+    Route::post('/social/order', [SocialMediaController::class, 'order'])->name('admin.social.order');
+    Route::post('/social/toggle-status/{id}', [SocialMediaController::class, 'toggleStatus'])->name('admin.social.toggle-status');
+
     // HomeCart rotaları
     Route::get('/home-cart', [HomeCartController::class, 'index'])->name('admin.home-cart.index');
     Route::get('/home-cart/create', [HomeCartController::class, 'create'])->name('admin.home-cart.create');
@@ -127,6 +132,22 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     Route::get('/contact-message/show/{id}', [ContactMessageController::class, 'show'])->name('admin.contact-message.show');
     Route::get('/contact-message/detail/{id}', [ContactMessageController::class, 'detail'])->name('admin.contact-message.detail');
 
+    // ContactMessageData rotaları
+    Route::resource('contact-messages-data', ContactMessageDataController::class)->names([
+        'index' => 'admin.contact-messages-data.index',
+        'create' => 'admin.contact-messages-data.create',
+        'store' => 'admin.contact-messages-data.store',
+        'show' => 'admin.contact-messages-data.show',
+        'edit' => 'admin.contact-messages-data.edit',
+        'update' => 'admin.contact-messages-data.update',
+        'destroy' => 'admin.contact-messages-data.destroy',
+    ]);
+
+    Route::get('subscribe', [SubscribeController::class, 'index'])->name('admin.subscribe.index');
+    Route::post('subscribe/{id}/change-status', [SubscribeController::class, 'changeStatus'])->name('admin.subscribe.change-status');
+    Route::delete('subscribe/{id}', [SubscribeController::class, 'destroy'])->name('admin.subscribe.destroy');
+    Route::post('subscribe', [SubscribeController::class, 'store'])->name('admin.subscribe.store');
+
 
 
     
@@ -138,8 +159,7 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
    
 });
 
-Route::post('/social/order', [SocialMediaController::class, 'order'])->name('admin.social.order');
-Route::post('/social/toggle-status/{id}', [SocialMediaController::class, 'toggleStatus'])->name('admin.social.toggle-status');
+
 
 
 
