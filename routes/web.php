@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\ContactMessageDataController;
 use App\Http\Controllers\Admin\SubscribeController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\CourseController;
 
 
 
@@ -59,7 +61,7 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])
     ->middleware('auth:admin');
 
 // Admin protected routes
-Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
+Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     // Header Ayarları
@@ -163,13 +165,29 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
 
 
     
+    Route::get('courses/status/{id}', [CourseController::class, 'status'])->name('courses.status');
 
+    // Define resource routes for courses within admin
+    Route::resource('courses', \App\Http\Controllers\Admin\CourseController::class);
+
+    // Define individual routes for AboutController
+    Route::get('/about', [AboutController::class, 'index'])->name('abouts.index');
+    Route::post('/about/update', [AboutController::class, 'update'])->name('abouts.update');
+    Route::get('abouts/status/{id}', [AboutController::class, 'status'])->name('abouts.status');
+
+    // ... any other admin routes ...
 
 
 
 
    
 });
+
+    // About Routes
+    
+
+
+
 
 
 

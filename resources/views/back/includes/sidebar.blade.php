@@ -137,6 +137,20 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{ route('abouts.index') }}" class="waves-effect">
+                        <i class="ri-service-line"></i>
+                        <span>Haqqımızda</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('courses.index') }}" class="waves-effect">
+                        <i class="ri-service-line"></i>
+                        <span>Kurslar</span>
+                    </a>
+                </li>
+
             </ul>
 
         </div>
