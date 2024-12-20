@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Translation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
+
 
 class TranslationController extends Controller
 {
     public function index()
     {
-        Artisan::call('migrate');
+        
         $translations = Translation::all();
         return view('admin.translations.index', compact('translations'));
     }

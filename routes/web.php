@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\ContactMessageDataController;
 use App\Http\Controllers\Admin\SubscribeController;
+use App\Http\Controllers\Admin\ServiceController;
 
 
 
@@ -147,6 +148,17 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     Route::post('subscribe/{id}/change-status', [SubscribeController::class, 'changeStatus'])->name('admin.subscribe.change-status');
     Route::delete('subscribe/{id}', [SubscribeController::class, 'destroy'])->name('admin.subscribe.destroy');
     Route::post('subscribe', [SubscribeController::class, 'store'])->name('admin.subscribe.store');
+
+    Route::resource('services', ServiceController::class)->names([
+        'index' => 'admin.services.index',
+        'create' => 'admin.services.create',
+        'store' => 'admin.services.store',
+        'edit' => 'admin.services.edit',
+        'update' => 'admin.services.update',
+        'destroy' => 'admin.services.destroy',
+    ]);
+
+    Route::post('services/toggle-status/{id}', [ServiceController::class, 'toggleStatus'])->name('admin.services.toggle-status');
 
 
 

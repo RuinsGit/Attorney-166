@@ -129,7 +129,16 @@
 
 
                 </li>
+
+                <li>
+                    <a href="{{ route('admin.services.index') }}" class="waves-effect">
+                        <i class="ri-service-line"></i>
+                        <span>Xidmətlər</span>
+                    </a>
+                </li>
+
             </ul>
+
         </div>
         <!-- Sidebar -->
     </div>
