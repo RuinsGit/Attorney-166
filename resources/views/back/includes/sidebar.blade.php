@@ -92,9 +92,15 @@
                         <li>
                         <a href="{{ route('admin.comment.index') }}" class="waves-effect">
                             <i class="ri-message-line"></i>
-                            <span>Rəylər</span>
+                            <span>Yorumlar</span>
                         </a>
                     </li>
+                    <li>
+                    <a href="{{ route('admin.comment_chat.index') }}" class="waves-effect">
+                        <i class="ri-message-line"></i>
+                        <span>Yorumlar Müraciətləri</span>
+                    </a>
+                </li>
 
                     <li>
                         <a href="{{ route('admin.contact-message.index') }}" class="waves-effect">
@@ -157,6 +163,8 @@
                         <span>Komandamız</span>
                     </a>
                 </li>
+
+               
 
             </ul>
 

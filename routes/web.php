@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LeaderController;
+use App\Http\Controllers\Admin\CommentChatController;
 
 
 
@@ -192,10 +193,23 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 
     Route::put('/admin/leaders/{id}', [LeaderController::class, 'update'])->name('admin.leaders.update');
 
+    Route::resource('comment_chat', CommentChatController::class)->names([
+        'index' => 'comment_chat.index',
+        'create' => 'comment_chat.create',
+        'store' => 'comment_chat.store',
+        'show' => 'comment_chat.show',
+        'edit' => 'comment_chat.edit',
+        'update' => 'comment_chat.update',
+        'destroy' => 'comment_chat.destroy',
+    ]);
+
 });
 
     // About Routes
     
 
 Route::delete('/admin/courses/{id}', [CourseController::class, 'destroy'])->name('admin.courses.destroy');
+
+// Frontend comment submission route
+Route::post('/comments', [CommentChatController::class, 'store'])->name('frontend.comments.store');
     
