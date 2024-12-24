@@ -129,7 +129,8 @@ class BlogController extends Controller
             'text_en' => 'required',
             'text_ru' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'bottom_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
+            'bottom_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'is_popular' => 'required|boolean'
         ]);
 
         $data = $request->all();
@@ -187,7 +188,7 @@ class BlogController extends Controller
         
         // Güncellenen verileri kontrol et
         $updatedBlog = Blog::find($blog->id);
-       
+        dd($updatedBlog);
 
         return redirect()->route('admin.blogs.index')
             ->with('success', 'Blog başarıyla güncellendi.');

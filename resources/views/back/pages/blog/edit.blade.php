@@ -141,6 +141,17 @@
                                     @enderror
                                 </div>
 
+                                <div class="mb-3">
+                                    <label class="form-label">{{ __('Populyar Blog') }}</label>
+                                    <select name="is_popular" class="form-control @error('is_popular') is-invalid @enderror">
+                                        <option value="0" {{ $blog->is_popular ? '' : 'selected' }}>{{ __('Yox') }}</option>
+                                        <option value="1" {{ $blog->is_popular ? 'selected' : '' }}>{{ __('Hə') }}</option>
+                                    </select>
+                                    @error('is_popular')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label class="form-label">{{ __('Üst Şəkil') }}</label>
