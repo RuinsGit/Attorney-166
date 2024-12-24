@@ -138,16 +138,23 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('abouts.index') }}" class="waves-effect">
-                        <i class="ri-service-line"></i>
+                    <a href="{{ route('admin.about.index') }}" class="waves-effect">
+                        <i class="ri-information-line"></i>
                         <span>Haqqımızda</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('courses.index') }}" class="waves-effect">
-                        <i class="ri-service-line"></i>
-                        <span>Kurslar</span>
+                    <a href="{{ route('admin.courses.index') }}" class="waves-effect">
+                        <i class="ri-book-line"></i>
+                        <span>Təcrübələr</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.leaders.index') }}" class="waves-effect">
+                        <i class="ri-user-line"></i>
+                        <span>Komandamız</span>
                     </a>
                 </li>
 

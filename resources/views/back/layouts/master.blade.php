@@ -99,7 +99,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <!-- Toastr bildirimleri -->
-   
+    @if(session('success'))
+        <script>
+            toastr.success("{{ session('success') }}");
+        </script>
+    @endif
     @stack('js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 </body>

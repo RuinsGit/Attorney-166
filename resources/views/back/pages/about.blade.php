@@ -59,7 +59,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            <form action="{{ route('abouts.update') }}" method="POST" class="needs-validation" enctype="multipart/form-data">
+                            <form action="{{ route('admin.about.update') }}" method="POST" class="needs-validation" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="tab-content p-3 text-muted">

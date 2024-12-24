@@ -7,16 +7,16 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Kurslar</h4>
+                        <h4 class="mb-sm-0">Tecrübələr</h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Ana Səhifə</a></li>
-                                <li class="breadcrumb-item active">Kurslar</li>
+                                <li class="breadcrumb-item active">Tecrübələr</li>
                             </ol>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <a href="{{ route('courses.create') }}" class="btn btn-primary">
+                        <a href="{{ route('admin.courses.create') }}" class="btn btn-primary">
                             <i class="mdi mdi-plus"></i> Yeni
                         </a>
                     </div>
@@ -78,7 +78,7 @@
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('courses.edit', $course->id) }}" 
+                                                            <a href="{{ route('admin.courses.edit', $course->id) }}" 
                                                                class="btn btn-primary btn-sm">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
@@ -120,7 +120,7 @@
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('courses.edit', $course->id) }}" 
+                                                            <a href="{{ route('admin.courses.edit', $course->id) }}" 
                                                                class="btn btn-primary btn-sm">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
@@ -162,7 +162,7 @@
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('courses.edit', $course->id) }}" 
+                                                            <a href="{{ route('admin.courses.edit', $course->id) }}" 
                                                                class="btn btn-primary btn-sm">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
@@ -197,7 +197,7 @@
     <script>
         function changeStatus(id) {
             $.ajax({
-                url: `{{ route('courses.status', '') }}/${id}`,
+                url: `{{ route('admin.courses.status', '') }}/${id}`,
                 type: 'GET',
                 success: function(response) {
                     if(response.status === 'success') {
@@ -228,7 +228,7 @@
                 cancelButtonText: 'Xeyr!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = `{{ route('courses.destroy', '') }}/${id}`;
+                    window.location.href = `{{ route('admin.courses.destroy', '') }}/${id}`;
                 }
             });
         }
