@@ -60,7 +60,7 @@ class CourseController extends Controller
             Course::create($data);
 
             return redirect()
-                ->route('courses.index')
+                ->route('admin.courses.index')
                 ->with('success', 'Kurs uğurla əlavə edildi');
 
         } catch (\Exception $e) {
@@ -129,7 +129,7 @@ class CourseController extends Controller
             ]);
 
             return redirect()
-                ->route('admin.course.index')
+                ->route('admin.courses.index')
                 ->with('success', 'Kurs uğurla yeniləndi');
 
         } catch (\Exception $e) {
@@ -151,7 +151,7 @@ class CourseController extends Controller
         $course->delete();
 
         return redirect()
-            ->route('admin.course.index')
+            ->route('admin.courses.index')
             ->with('success', 'Kurs uğurla silindi');
     }
 

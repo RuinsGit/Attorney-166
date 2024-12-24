@@ -78,14 +78,12 @@
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('admin.courses.edit', $course->id) }}" 
-                                                               class="btn btn-primary btn-sm">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                            <button class="btn btn-danger btn-sm" 
-                                                                    onclick="deleteData({{ $course->id }})">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
+                                                            <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bu kursu silmək istədiyinizə əminsiniz?');">Sil</button>
+                                                            </form>
+                                                            <a href="{{ route('admin.courses.edit', $course->id) }}" class="btn btn-warning btn-sm">Redaktə et</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -120,14 +118,12 @@
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('admin.courses.edit', $course->id) }}" 
-                                                               class="btn btn-primary btn-sm">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                            <button class="btn btn-danger btn-sm" 
-                                                                    onclick="deleteData({{ $course->id }})">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
+                                                            <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bu kursu silmək istədiyinizə əminsiniz?');">Sil</button>
+                                                            </form>
+                                                            <a href="{{ route('admin.courses.edit', $course->id) }}" class="btn btn-warning btn-sm">Redaktə et</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -162,14 +158,12 @@
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('admin.courses.edit', $course->id) }}" 
-                                                               class="btn btn-primary btn-sm">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                            <button class="btn btn-danger btn-sm" 
-                                                                    onclick="deleteData({{ $course->id }})">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
+                                                            <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bu kursu silmək istədiyinizə əminsiniz?');">Sil</button>
+                                                            </form>
+                                                            <a href="{{ route('admin.courses.edit', $course->id) }}" class="btn btn-warning btn-sm">Redaktə et</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
