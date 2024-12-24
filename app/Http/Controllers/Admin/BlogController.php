@@ -188,7 +188,7 @@ class BlogController extends Controller
         
         // Güncellenen verileri kontrol et
         $updatedBlog = Blog::find($blog->id);
-        dd($updatedBlog);
+       
 
         return redirect()->route('admin.blogs.index')
             ->with('success', 'Blog başarıyla güncellendi.');
