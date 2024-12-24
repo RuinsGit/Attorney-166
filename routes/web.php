@@ -18,6 +18,9 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LeaderController;
 use App\Http\Controllers\Admin\CommentChatController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\BlogTypeController;
+use App\Http\Controllers\HomeController;
 
 
 
@@ -203,6 +206,11 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
         'destroy' => 'comment_chat.destroy',
     ]);
 
+    Route::resource('blogs', BlogController::class);
+    Route::post('blogs/toggle-status/{id}', [BlogController::class, 'toggleStatus'])->name('blogs.toggle-status');
+
+    Route::resource('blog_types', BlogTypeController::class);
+
 });
 
     // About Routes
@@ -212,4 +220,6 @@ Route::delete('/admin/courses/{id}', [CourseController::class, 'destroy'])->name
 
 // Frontend comment submission route
 Route::post('/comments', [CommentChatController::class, 'store'])->name('frontend.comments.store');
+
+Route::get('/', [HomeController::class, 'index']);
     

@@ -1,205 +1,139 @@
 @extends('back.layouts.master')
 
+@section('title', __('Bloglar'))
+
 @section('content')
     <div class="page-content">
         <div class="container-fluid">
-
-            <!-- start page title -->
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Xəbərlər</h4>
-
+                        <h4 class="mb-sm-0">{{ __('Bloglar') }}</h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Ana səhifə</a></li>
-                                <li class="breadcrumb-item active">Xəbərlər</li>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Ana səhifə') }}</a></li>
+                                <li class="breadcrumb-item active">{{ __('Bloglar') }}</li>
                             </ol>
                         </div>
-
-                    </div>
-                    <div class="mb-3">
-                        <a href="{{ route('admin.blog.create') }}" class="btn btn-primary">
-                            <i class="mdi mdi-plus"></i>
-                        </a>
                     </div>
                 </div>
             </div>
-            <!-- end page title -->
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <form action="{{ route('admin.blogs.index') }}" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control" placeholder="{{ __('Axtarış...') }}" value="{{ request('search') }}">
+                            <button class="btn btn-primary" type="submit">{{ __('Axtar') }}</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <form action="{{ route('admin.blogs.index') }}" method="GET">
+                        <div class="input-group">
+                            <select name="blog_type_id" class="form-control">
+                                <option value="">{{ __('Blog Türü Seçin') }}</option>
+                                @foreach($blogTypes as $blogType)
+                                    <option value="{{ $blogType->id }}" {{ request('blog_type_id') == $blogType->id ? 'selected' : '' }}>{{ $blogType->text }}</option>
+                                @endforeach
+                            </select>
+                            <button class="btn btn-primary" type="submit">{{ __('Filtrele') }}</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <form action="{{ route('admin.blogs.index') }}" method="GET">
+                        <div class="input-group">
+                            <select name="is_popular" class="form-control">
+                                <option value="">{{ __('Popüler Bloglar') }}</option>
+                                <option value="1" {{ request('is_popular') == '1' ? 'selected' : '' }}>{{ __('Bəli') }}</option>
+                                <option value="0" {{ request('is_popular') == '0' ? 'selected' : '' }}>{{ __('Xeyr') }}</option>
+                            </select>
+                            <button class="btn btn-primary" type="submit">{{ __('Filtrele') }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
-
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-pills nav-justified" role="tablist">
-                                <li class="nav-item waves-effect waves-light">
-                                    <a class="nav-link active" data-bs-toggle="tab" href="#az" role="tab">
-                                        <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                        <span class="d-none d-sm-block">AZ</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item waves-effect waves-light">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#en" role="tab">
-                                        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                        <span class="d-none d-sm-block">EN</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item waves-effect waves-light">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#ru" role="tab">
-                                        <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                        <span class="d-none d-sm-block">RU</span>
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <!-- Tab panes -->
-                            <div class="tab-content p-3 text-muted">
-                                <div class="tab-pane active" id="az" role="tabpanel">
-                                    <div class="table-responsive">
-                                        <table class="table table-responsive mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Şəkil</th>
-                                                    <th>Başlıq (Az)</th>
-                                                    <th>Yaranma tarixi</th>
-                                                    <th>Əməliyyatlar</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($blogs as $blog)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>
-                                                            <img src="{{ asset($blog->poster_image) }}" width="70"
-                                                                height="70" alt="">
-                                                        </td>
-                                                        <td>{{ $blog->title_az }}</td>
-                                                        <td>{{ $blog->date->format('d/m/Y') }}</td>
-                                                        <td>
-                                                            <a href="{{ route('admin.blog.edit', ['id' => $blog->id]) }}"
-                                                                class="btn btn-success">
-                                                                <i class="mdi mdi-account-edit"></i>
-                                                            </a>
-                                                            <a class="btn btn-danger"
-                                                                onclick="deleteItem({{ $blog->id }})">
-                                                                <i class="mdi mdi-delete"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="en" role="tabpanel">
-                                    <div class="table-responsive">
-                                        <table class="table table-responsive mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Şəkil</th>
-                                                    <th>Başlıq (En)</th>
-                                                    <th>Yaranma tarixi</th>
-                                                    <th>Əməliyyatlar</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($blogs as $blog)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>
-                                                            <img src="{{ asset($blog->poster_image) }}" width="70"
-                                                                height="70" alt="">
-                                                        </td>
-                                                        <td>{{ $blog->title_en }}</td>
-                                                        <td>{{ $blog->date->format('d/m/Y') }}</td>
-                                                        <td>
-                                                            <a href="{{ route('admin.blog.edit', ['id' => $blog->id]) }}"
-                                                                class="btn btn-success">
-                                                                <i class="mdi mdi-account-edit"></i>
-                                                            </a>
-                                                            <a class="btn btn-danger"
-                                                                onclick="deleteItem({{ $blog->id }})">
-                                                                <i class="mdi mdi-delete"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="ru" role="tabpanel">
-                                    <div class="table-responsive">
-                                        <table class="table table-responsive mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Şəkil</th>
-                                                    <th>Başlıq (Ru)</th>
-                                                    <th>Yaranma tarixi</th>
-                                                    <th>Əməliyyatlar</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($blogs as $blog)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>
-                                                            <img src="{{ asset($blog->poster_image) }}" width="70"
-                                                                height="70" alt="">
-                                                        </td>
-                                                        <td>{{ $blog->title_ru }}</td>
-                                                        <td>{{ $blog->date->format('d/m/Y') }}</td>
-                                                        <td>
-                                                            <a href="{{ route('admin.blog.edit', ['id' => $blog->id]) }}"
-                                                                class="btn btn-success">
-                                                                <i class="mdi mdi-account-edit"></i>
-                                                            </a>
-                                                            <a class="btn btn-danger"
-                                                                onclick="deleteItem({{ $blog->id }})">
-                                                                <i class="mdi mdi-delete"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                            <h4 class="card-title">{{ __('Bloglar') }}</h4>
+                            <div class="mb-3">
+                                <a href="{{ route('admin.blogs.create') }}" class="btn btn-primary">
+                                    <i class="mdi mdi-plus me-1"></i> {{ __('Yeni Blog') }}
+                                </a>
                             </div>
 
+                            <div class="table-responsive">
+                                <table class="table table-bordered mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{{ __('Şəkil') }}</th>
+                                            <th>{{ __('Alt Şəkil') }}</th>
+                                            <th>{{ __('Başlıq') }}</th>
+                                            <th>{{ __('Mətn') }}</th>
+                                            <th>{{ __('Status') }}</th>
+                                            <th>{{ __('Əməliyyatlar') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($blogs as $blog)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                @if($blog->image)
+                                                    <img src="{{ asset($blog->image) }}" alt="{{ __('Blog Şəkili') }}" class="img-thumbnail" style="width: 150px; height: 100px; object-fit: cover;">
+                                                @else
+                                                    <span class="text-muted">{{ __('Şəkil yoxdur') }}</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($blog->bottom_image)
+                                                    <img src="{{ asset($blog->bottom_image) }}" alt="{{ __('Alt Şəkil') }}" class="img-thumbnail" style="width: 150px; height: 100px; object-fit: cover;">
+                                                @else
+                                                    <span class="text-muted">{{ __('Şəkil yoxdur') }}</span>
+                                                @endif
+                                            </td>
+                                            <td>{{ $blog->title_az }}</td>
+                                            <td>
+                                                <div style="max-height: 100px; overflow: auto;">
+                                                    {!! $blog->description_az !!}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('admin.blogs.toggle-status', $blog->id) }}" method="POST" class="d-inline-block">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-{{ $blog->status ? 'success' : 'danger' }}">
+                                                        {{ $blog->status ? __('Aktiv') : __('Deaktiv') }}
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <form action="{{ route('admin.blogs.destroy', $blog->id) }}" method="POST" class="d-inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            {{ $blogs->links() }}
                         </div>
                     </div>
                 </div>
             </div>
-        </div> <!-- container-fluid -->
+        </div>
     </div>
-    <!-- End Page-content -->
 @endsection
-
-@push('js')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        function deleteItem(id) {
-            event.preventDefault();
-            let url = "{{ route('admin.blog.destroy', ['id' => ':id']) }}".replace(':id', id);
-            Swal.fire({
-                title: 'Silmək istədiyinizdən əminsiniz mi?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Bəli!',
-                confirmCancelText: 'Xeyr!',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.replace(url);
-                }
-            })
-        }
-    </script>
-@endpush

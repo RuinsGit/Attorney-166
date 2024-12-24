@@ -164,6 +164,31 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-message-line"></i>
+                        <span>Bloglar</span>
+                    </a>
+
+                    <ul class="sub-menu" aria-expanded="false">
+                        
+                        <li>
+                    <a href="{{ route('admin.blogs.index') }}" class="waves-effect">
+                        <i class="ri-message-line"></i>
+                        <span>Bloglar</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.blog_types.index') }}" class="waves-effect">
+                        <i class="ri-message-line"></i>
+                        <span>Blog Türləri</span>
+                    </a>
+                </li>
+                    </ul>
+
+                </li>
+
                
 
             </ul>
