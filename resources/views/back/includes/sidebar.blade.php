@@ -85,7 +85,7 @@
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="ri-message-line"></i>
-                            <span>Əlaqə</span>
+                            <span>Əlaqə Məlumatları</span>
                         </a>
 
                         <ul class="sub-menu" aria-expanded="false">
@@ -113,6 +113,13 @@
                         <a href="{{ route('admin.contact-messages-data.index') }}" class="waves-effect">
                             <i class="ri-message-line"></i>
                             <span>Əlaqə Data</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('admin.contact.index') }}" class="waves-effect">
+                            <i class="ri-message-line"></i>
+                            <span>Əlaqə Informasiyaları</span>
                         </a>
                     </li>
 

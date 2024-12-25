@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\CommentChatController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BlogTypeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\ContactController;
 
 
 
@@ -211,6 +212,8 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 
     Route::resource('blog_types', BlogTypeController::class);
 
+    Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contacts', [ContactController::class, 'store'])->name('contact.store');
 });
 
     // About Routes
@@ -222,4 +225,13 @@ Route::delete('/admin/courses/{id}', [CourseController::class, 'destroy'])->name
 Route::post('/comments', [CommentChatController::class, 'store'])->name('frontend.comments.store');
 
 Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
+
+Route::put('/pages/contact/update', [ContactController::class, 'update'])->name('pages.contact.update');
+
+Route::get('/contacts', [ContactController::class, 'index'])->name('admin.contacts.index');
+Route::post('/contacts', [ContactController::class, 'store'])->name('admin.contacts.store');
+Route::put('/contacts/update', [ContactController::class, 'update'])->name('admin.contacts.update');
     
