@@ -41,11 +41,33 @@ use App\Http\Controllers\Admin\ContactController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Guest middleware ile korunan login rotaları
+Route::middleware(['guest:admin'])->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login-handle', [AuthController::class, 'login'])->name('handle-login');
 });
 
-// Admin ana route - kullanıcının durumuna göre yönlendirme yapar
+// Ana sayfa rotası
+Route::get('/', function () {
+    if (auth()->check()) {
+        return redirect()->route('admin.product.index'); // Kullanıcı oturum açmışsa admin paneline yönlendir
+    } else {
+        return redirect()->route('login'); // Kullanıcı oturum açmamışsa login sayfasına yönlendir
+    }
+});
+
+// Admin rotaları
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Ana admin rotası - login sayfasına yönlendir
+    Route::get('/', function () {
+        return redirect()->route('admin.product.index'); // Admin paneline yönlendir
+    });
+
+    // Diğer admin rotalarınızı buraya ekleyin
+    Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+    // Diğer admin rotaları...
+});
+
 Route::get('/admin', function () {
     if (auth()->guard('admin')->check()) {
         return redirect()->route('admin.dashboard');
@@ -233,5 +255,5 @@ Route::put('/pages/contact/update', [ContactController::class, 'update'])->name(
 
 Route::get('/contacts', [ContactController::class, 'index'])->name('admin.contacts.index');
 Route::post('/contacts', [ContactController::class, 'store'])->name('admin.contacts.store');
-Route::put('/contacts/update', [ContactController::class, 'update'])->name('admin.contacts.update');
+Route::put('/admin/contacts/update', [ContactController::class, 'update'])->name('admin.contacts.update');
     

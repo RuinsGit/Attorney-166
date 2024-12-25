@@ -1,12 +1,1 @@
-@extends('layouts.app')
-
-@section('content')
-    <div class="container">
-        <h1>{{ __('Popüler Bloglar') }}</h1>
-        <ul>
-            @foreach($popularBlogs as $popularBlog)
-                <li><a href="{{ route('admin.blogs.edit', $popularBlog->id) }}">{{ $popularBlog->title }}</a></li>
-            @endforeach
-        </ul>
-                </div>
-@endsection
+<h1 style="text-align: center; border: 1px solid red; padding: 10px; border-radius: 10px; background-color: #f0f0f0; color: #333; font-size: 24px; font-weight: bold; margin-top: 20px; margin-bottom: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1 ); background-image: url('{{ asset('images/logo.png') }}'); background-size: cover; background-position: center; border-radius: 10px; transform: rotate(180deg);">RUINS ADMIN PANEL</h1>
