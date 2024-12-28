@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
 use Illuminate\Http\Request;
 
-class HomeController
+class HomeController extends Controller
 {
     public function index()
     {
-        $popularBlogs = Blog::where('is_popular', 1)->get(); // Popüler blogları al
-        return view('welcome', compact('popularBlogs'));
+        // Gerekli verileri al ve view'ı döndür
+        $settings = [
+            'home' => 'Ana Sayfa Başlığı',
+            // Diğer ayarlar...
+        ];
+
+        return view('front.pages.index', compact('settings'));
     }
 } 

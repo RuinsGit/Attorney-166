@@ -246,7 +246,7 @@ Route::delete('/admin/courses/{id}', [CourseController::class, 'destroy'])->name
 // Frontend comment submission route
 Route::post('/comments', [CommentChatController::class, 'store'])->name('frontend.comments.store');
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
 Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
@@ -256,4 +256,11 @@ Route::put('/pages/contact/update', [ContactController::class, 'update'])->name(
 Route::get('/contacts', [ContactController::class, 'index'])->name('admin.contacts.index');
 Route::post('/contacts', [ContactController::class, 'store'])->name('admin.contacts.store');
 Route::put('/admin/contacts/update', [ContactController::class, 'update'])->name('admin.contacts.update');
+
+Route::get('/about', [App\Http\Controllers\AboutController::class, 'index'])->name('about.index');
+
+Route::get('/service', [App\Http\Controllers\ServiceController::class, 'index'])->name('service.index');
+
+Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog-detail/{id}', [App\Http\Controllers\BlogController::class, 'detail'])->name('blog.detail');
     
