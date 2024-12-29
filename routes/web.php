@@ -281,4 +281,5 @@ Route::get('lang/{locale}', function ($locale) {
 Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonial.index');
 Route::get('/experience', [ExperienceController::class, 'index'])->name('experience.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonial.store');
     
