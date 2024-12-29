@@ -2,16 +2,16 @@
     <div class="navbar-container">
         <div class="navbar">
             <a href="{{ route('home') }}" class="nav-logo">
-                <img src="{{ asset('front/assets/images/nav-logo.svg') }}" alt="">
+                <img src="{{ asset('uploads/'.$header->logo) }}" alt="">
             </a>
             <div class="navbar-links">
-                <a href="{{ route('home') }}" class="navbar-link {{ request()->url() == url('/') ? 'active' : '' }}">Ana Səhifə</a>
-                <a href="{{ route('about.index') }}" class="navbar-link {{ request()->url() == route('about.index') ? 'active' : '' }}">Haqqımızda</a>
-                <a href="{{ route('service.index') }}" class="navbar-link {{ request()->url() == route('service.index') ? 'active' : '' }}">Xidmətlər</a>
-                <a href="{{ route('blog.index') }}" class="navbar-link {{ request()->url() == route('blog.index') ? 'active' : '' }}">Bloq</a>
-                <a href="customer_reviews.html" class="navbar-link">Müştəri rəyləri</a>
-                <a href="experience.html" class="navbar-link">Təcrübə</a>
-                <a href="contact.html" class="navbar-link">Əlaqə</a>
+                <a href="{{ route('home') }}" class="navbar-link {{ request()->url() == url('/') ? 'active' : '' }}">{{ $header->{"homepage_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('about.index') }}" class="navbar-link {{ request()->url() == route('about.index') ? 'active' : '' }}">{{ $header->{"about_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('service.index') }}" class="navbar-link {{ request()->url() == route('service.index') ? 'active' : '' }}">{{ $header->{"services_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('blog.index') }}" class="navbar-link {{ request()->url() == route('blog.index') ? 'active' : '' }}">{{ $header->{"blog_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('testimonial.index') }}" class="navbar-link {{ request()->routeIs('testimonial.index') ? 'active' : '' }}">{{ $header->{"testimonials_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('experience.index') }}" class="navbar-link {{ request()->routeIs('experience.index') ? 'active' : '' }}">{{ $header->{"experience_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('contact.index') }}" class="navbar-link {{ request()->routeIs('contact.index') ? 'active' : '' }}">{{ $header->{"contact_title_" . app()->getLocale()} }}</a>
             </div>
             <button class="hamburger" type="button">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

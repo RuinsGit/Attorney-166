@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BlogTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\ExperienceController;
 
 
 
@@ -265,4 +267,18 @@ Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name
 Route::get('/blog-detail/{id}', [App\Http\Controllers\BlogController::class, 'detail'])->name('blog.detail');
 
 Route::post('/contact', [HomeController::class, 'storeMessage'])->name('contact.store');
+
+// Dil değiştirme route'u
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['az', 'en', 'ru'])) {
+        session(['locale' => $locale]);
+        app()->setLocale($locale);
+    }
+    return redirect()->back();
+})->name('lang.switch');
+
+// Yeni route'lar
+Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonial.index');
+Route::get('/experience', [ExperienceController::class, 'index'])->name('experience.index');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
     

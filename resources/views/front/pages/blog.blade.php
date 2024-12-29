@@ -13,7 +13,7 @@
     <div class="swiper-wrapper">
         @foreach($popularBlogs as $blog)
         <a href="{{ route('blog.detail', $blog->id) }}" class="lastBlog-item swiper-slide">
-            <img src="{{ asset($blog->image) }}" alt="">
+            <img src="{{ asset($blog->bottom_image) }}" alt="">
             <div class="lastBlog-content p-lr">
                 <span class="blog-category">{{ $blog->blogType->name_az ?? 'Yeniliklər' }}</span>
                 <h2 class="lastBlog-title">{{ $blog->title_az }}</h2>

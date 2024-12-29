@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\BlogType;
+use App\Models\Header;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
     public function index()
     {
+        $header = Header::first();
         $settings = [
             'blog' => 'Bloqlar',
         ];
@@ -18,7 +20,7 @@ class BlogController extends Controller
         $popularBlogs = Blog::where('is_popular', 1)->where('status', 1)->get();
         $blogTypes = BlogType::all();
 
-        return view('front.pages.blog', compact('settings', 'blogs', 'popularBlogs', 'blogTypes'));
+        return view('front.pages.blog', compact('settings', 'blogs', 'popularBlogs', 'blogTypes', 'header'));
     }
 
     public function detail($id)
@@ -51,6 +53,6 @@ class BlogController extends Controller
             ->take(6)
             ->get();
 
-        return view('front.pages.blog-detail', compact('settings', 'blog', 'recentBlogs', 'popularBlogs', 'otherBlogs'));
+        return view('front.pages.blog-detail', compact('settings', 'blog', 'recentBlogs', 'popularBlogs', 'otherBlogs', 'header'));
     }
 } 

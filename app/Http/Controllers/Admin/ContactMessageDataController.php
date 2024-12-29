@@ -23,6 +23,8 @@ class ContactMessageDataController extends Controller
     {
         $request->validate([
             'message_az' => 'required',
+            'message_en' => 'required',
+            'message_ru' => 'required',
             'image' => 'nullable|image',
         ]);
 
@@ -50,10 +52,14 @@ class ContactMessageDataController extends Controller
     {
         $request->validate([
             'message_az' => 'required',
+            'message_en' => 'required',
+            'message_ru' => 'required',
             'image' => 'nullable|image',
         ]);
 
         $contact_messages_datum->message_az = $request->message_az;
+        $contact_messages_datum->message_en = $request->message_en;
+        $contact_messages_datum->message_ru = $request->message_ru;
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

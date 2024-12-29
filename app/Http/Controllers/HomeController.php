@@ -11,6 +11,8 @@ use App\Models\Blog;
 use App\Models\Comment;
 use App\Models\ContactMessage;
 use App\Models\ContactMessageData;
+use App\Models\Translation;
+use App\Models\Header;
 
 class HomeController extends Controller
 {
@@ -19,6 +21,7 @@ class HomeController extends Controller
         $settings = [
             'home' => 'Ana Sayfa Başlığı',
         ];
+        $header = Header::first();
         $hero = HomeHero::first();
         $cards = HomeCart::where('status', 1)->latest()->get();
         $include = HomeInclude::where('status', 1)->first();
@@ -26,8 +29,9 @@ class HomeController extends Controller
         $blogs = Blog::where('status', 1)->latest()->get();
         $comments = Comment::where('status', 1)->latest()->get();
         $contactdata = ContactMessageData::first();
+        $translations = Translation::where('status', 1)->get();
 
-        return view('front.pages.index', compact('hero', 'settings', 'cards', 'include', 'services', 'blogs', 'comments', 'contactdata'));
+        return view('front.pages.index', compact('hero', 'settings', 'cards', 'include', 'services', 'blogs', 'comments', 'contactdata', 'translations', 'header'));
     }
 
     public function storeMessage(Request $request)

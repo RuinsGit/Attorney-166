@@ -1,8 +1,8 @@
 <header class="p-lr">
         <div class="header-lang">
-            <a href="" class="lang-item active">AZ</a>
-            <a href="" class="lang-item">EN</a>
-            <a href="" class="lang-item">RU</a>
+            <a href="{{ route('lang.switch', 'az') }}" class="lang-item {{ app()->getLocale() == 'az' ? 'active' : '' }}">AZ</a>
+            <a href="{{ route('lang.switch', 'en') }}" class="lang-item {{ app()->getLocale() == 'en' ? 'active' : '' }}">EN</a>
+            <a href="{{ route('lang.switch', 'ru') }}" class="lang-item {{ app()->getLocale() == 'ru' ? 'active' : '' }}">RU</a>
         </div>
         <div class="header-socials">
             <a href="" class="header-social-item">

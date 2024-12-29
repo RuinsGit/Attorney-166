@@ -89,7 +89,7 @@
                             {{ $include->{"description1_" . app()->getLocale()} }}
                         </p>
                     </div>
-                    <a href="about.html" class="more">Daha çox</a>
+                    <a href="about.html" class="more">{{ $translations->where('key', 'about_more1')->first()->value }}</a>
                 </div>
                 <div class="home-about-img">
                     <img src="{{ asset($include->image1) }}" alt="">
@@ -103,7 +103,7 @@
                             {{ $include->{"description2_" . app()->getLocale()} }}
                         </p>
                     </div>
-                    <a href="about.html" class="more">Daha çox</a>
+                    <a href="about.html" class="more">{{ $translations->where('key', 'about_more2')->first()->value }}</a>
                 </div>
             </div>
         </div>
@@ -111,8 +111,8 @@
     <div class="home-service-section p-lr">
         <div class="home-service-inner">
             <div class="home-service-head">
-                <h2 class="section-title">Xidmətlər</h2>
-                <a href="service.html" class="more">Daha çox</a>
+                <h2 class="section-title">{{ $translations->where('key', 'services_title')->first()->value }}</h2>
+                <a href="service.html" class="more">{{ $translations->where('key', 'services_more')->first()->value }}</a>
             </div>
             <div class="home-service-boxes">
                 @foreach($services as $service)
@@ -134,8 +134,8 @@
     </div>
     <div class="home-blogs-container p-lr">
         <div class="home-blog-head">
-            <h2 class="section-title">Bloqlar</h2>
-            <a href="blogs.html" class="more">Daha çox</a>
+            <h2 class="section-title">{{ $translations->where('key', 'blogs_title')->first()->value }}</h2>
+            <a href="blogs.html" class="more">{{ $translations->where('key', 'blogs_more')->first()->value }}</a>
         </div>
         <div class="home-blog-slide swiper">
             <div class="swiper-wrapper">
@@ -157,7 +157,7 @@
         </div>
     </div>
     <div class="testimonials-container p-lr">
-        <h2 class="section-title">Testimonials</h2>
+        <h2 class="section-title">{{ $translations->where('key', 'testimonials_title')->first()->value }}</h2>
         <div class="testimonials-boxes">
             @foreach($comments as $comment)
             <div class="testimonial-box">
@@ -183,7 +183,7 @@
             <h2 class="section-title">{{ $contactdata->{"message_" . app()->getLocale()} }}</h2>
             <form action="{{ route('contact.store') }}" class="online-application-from" method="POST">
                 @csrf
-                <h3 class="form-title">Əlaqə forması</h3>
+                <h3 class="form-title">{{ $translations->where('key', 'contact_form_title')->first()->value }}</h3>
                 
                 @if(session('success'))
                     <div class="alert alert-success" style="background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
@@ -198,38 +198,38 @@
                 @endif
 
                 <div class="form-item">
-                    <label for="name">Ad</label>
-                    <input type="text" id="name" name="name" placeholder="Adınız" value="{{ old('name') }}" required>
+                    <label for="name">{{ $translations->where('key', 'contact_form_name')->first()->value }}</label>
+                    <input type="text" id="name" name="name" placeholder="{{ $translations->where('key', 'contact_form_name_placeholder')->first()->value }}" value="{{ old('name') }}" required>
                     @error('name')
                         <span style="color: #dc3545; font-size: 14px; margin-top: 5px; display: block;">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="form-item">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Email ünvanınız" value="{{ old('email') }}" required>
+                    <label for="email">{{ $translations->where('key', 'Contact_form_mail')->first()->value }}</label>
+                    <input type="email" id="email" name="email" placeholder="{{ $translations->where('key', 'contact_form_mail_placeholder')->first()->value }}" value="{{ old('email') }}" required>
                     @error('email')
                         <span style="color: #dc3545; font-size: 14px; margin-top: 5px; display: block;">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="form-item">
-                    <label for="phone">Telefon</label>
-                    <input type="text" id="phone" name="phone" placeholder="+994 00 000 00 00" value="{{ old('phone') }}" required>
+                    <label for="phone">{{ $translations->where('key', 'contact_form_phone')->first()->value }}</label>
+                    <input type="text" id="phone" name="phone" placeholder="{{ $translations->where('key', 'contact_form_phone_placeholder')->first()->value }}" value="{{ old('phone') }}" required>
                     @error('phone')
                         <span style="color: #dc3545; font-size: 14px; margin-top: 5px; display: block;">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="form-item">
-                    <label for="message">Sualınız</label>
-                    <textarea id="message" name="message" placeholder="Sualınızı yazın" required>{{ old('message') }}</textarea>
+                    <label for="message">{{ $translations->where('key', 'contact_form_message')->first()->value }}</label>
+                    <textarea id="message" name="message" placeholder="{{ $translations->where('key', 'contact_form_message_placeholder')->first()->value }}" required>{{ old('message') }}</textarea>
                     @error('message')
                         <span style="color: #dc3545; font-size: 14px; margin-top: 5px; display: block;">{{ $message }}</span>
                     @enderror
                 </div>
 
-                <button class="send-onlineApplication" type="submit">Göndər</button>
+                <button class="send-onlineApplication" type="submit">{{ $translations->where('key', 'contact_form_send')->first()->value }}</button>
             </form>
             <div class="online-application-img">
                 <img src="{{ asset($contactdata->image) }}" alt="">
