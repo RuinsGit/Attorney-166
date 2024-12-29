@@ -2,7 +2,7 @@
     <div class="navbar-container">
         <div class="navbar">
             <a href="{{ route('home') }}" class="nav-logo">
-                <img src="./front/assets/images/nav-logo.svg" alt="">
+                <img src="{{ asset('front/assets/images/nav-logo.svg') }}" alt="">
             </a>
             <div class="navbar-links">
                 <a href="{{ route('home') }}" class="navbar-link {{ request()->url() == url('/') ? 'active' : '' }}">Ana Səhifə</a>

@@ -6,14 +6,14 @@
 <div class="home-hero p-lr">
         <div class="hero-bg p-lr">
             <div class="hero-bg-img">
-                <img src="./assets/images/bg-img.png" alt="">
+                <img src="{{ asset('uploads/'.$hero->background_image) }}" alt="">
             </div>
         </div>
         <div class="hero-inner">
             <div class="hero-left">
                 <div class="hero-content">
-                    <h1>Azərbaycanda Tam Xidmət Göstərən Hüquq Şirkəti</h1>
-                    <p>We advocate for consumers and underrepresented parties, amplifying their voices and safeguarding their rights.</p>
+                    <h1>{{ $hero->{"text_" . app()->getLocale()} }}</h1>
+                    <p>{!! $hero->{"description_" . app()->getLocale()} !!}</p>
                     <a href="" class="hero-link">Daha çox</a>
                 </div>
                 <div class="hero-contacts">
@@ -28,7 +28,7 @@
                             </clipPath>
                             </defs>
                         </svg>
-                        +994 50 334 00 00 
+                        {{ $hero->number_az }}
                     </a>
                     <a href="" class="hero-contact-item">
                         <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,18 +43,18 @@
                             </defs>
                             </svg>
                             
-                        Bakı şəhəri
+                        {{ $hero->text2_az }}
                     </a>
                     <a href="" class="hero-contact-item">
                         <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.0833 6.35923V3.42778C11.0833 2.78436 10.5601 2.26111 9.91665 2.26111H1.16665C0.523223 2.26111 0 2.78433 0 3.42778V9.26111C0 9.90453 0.523223 10.4278 1.16668 10.4278H7.70771C8.08987 11.7724 9.32621 12.7611 10.7917 12.7611C11.3556 12.7611 11.9102 12.6127 12.3961 12.3316C12.5354 12.251 12.5833 12.0727 12.5024 11.9331C12.4217 11.7935 12.2432 11.7454 12.1039 11.8269C11.7068 12.0565 11.2531 12.1778 10.7916 12.1778C9.34412 12.1778 8.16665 11.0003 8.16665 9.55278C8.16665 8.10529 9.34415 6.92778 10.7916 6.92778C12.2391 6.92778 13.4166 8.10529 13.4166 9.55278V9.84446C13.4166 10.166 13.1549 10.4278 12.8333 10.4278C12.5118 10.4278 12.25 10.166 12.25 9.84446V8.67778C12.25 8.51657 12.1195 8.38611 11.9583 8.38611C11.8799 8.38611 11.8094 8.41785 11.757 8.46814C11.4992 8.23842 11.1633 8.09443 10.7916 8.09443C9.98758 8.09443 9.33332 8.74869 9.33332 9.55276C9.33332 10.3568 9.98758 11.0111 10.7917 11.0111C11.2263 11.0111 11.6128 10.8161 11.8802 10.5134C12.0915 10.8135 12.4391 11.0111 12.8334 11.0111C13.4768 11.0111 14 10.4879 14 9.84443V9.55276C14 7.88214 12.716 6.50726 11.0833 6.35923ZM1.16668 2.84443H9.91668C9.92882 2.84443 9.93899 2.85064 9.95096 2.85138L5.78151 6.2738C5.63311 6.36724 5.41806 6.34785 5.3215 6.28862L1.13274 2.85132C1.14458 2.85061 1.15464 2.84443 1.16668 2.84443ZM10.5 6.35923C8.86728 6.50726 7.58332 7.88214 7.58332 9.55278C7.58332 9.65122 7.58937 9.74824 7.59809 9.84446H1.16668C0.845113 9.84446 0.583352 9.5827 0.583352 9.26114V3.42778C0.583352 3.34518 0.60159 3.26717 0.632707 3.19591L4.97716 6.75861C5.14691 6.86941 5.34204 6.92781 5.5417 6.92781C5.73368 6.92781 5.92137 6.8737 6.08658 6.77116C6.1031 6.76233 6.11877 6.7518 6.13359 6.73955L10.4506 3.19585C10.4818 3.26717 10.5 3.34518 10.5 3.42781V6.35923H10.5ZM10.7917 10.4278C10.3092 10.4278 9.91668 10.0353 9.91668 9.55278C9.91668 9.07028 10.3092 8.67778 10.7917 8.67778C11.2742 8.67778 11.6667 9.07028 11.6667 9.55278C11.6667 10.0353 11.2742 10.4278 10.7917 10.4278Z" fill="white"/>
                         </svg>                            
-                        info@lorem.az 
+                        {{ $hero->mail_az }} 
                     </a>
                 </div>
             </div>
             <div class="hero-img">
-                <img src="./front/assets/images/heroImg.png" alt="">
+                <img src="{{ asset('uploads/'.$hero->image) }}" alt="">
             </div>
         </div>
 
@@ -62,73 +62,45 @@
     <div class="home-about-section p-lr">
         <div class="home-about-container">
             <div class="home-advantages-boxes">
+                @foreach($cards as $card)
                 <div class="home-advantage-box">
                     <div class="box-inner">
                         <div class="icon">
-                            <img src="./front/assets/icons/advantageBox.svg" alt="">
+                            <img src="{{ asset($card->image) }}" alt="{{ $card->name }}">
                         </div>
-                        <h2 class="advantage-title">Proffesional Service</h2>
+                        <h2 class="advantage-title">{{ $card->name }}</h2>
                         <span class="underline"></span>
                         <div class="box-desc">
                             <p>
-                                We advocate for consumers and underrepresented parties, amplifying their voices and safeguarding their rights.
-                            </p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="home-advantage-box">
-                    <div class="box-inner">
-                        <div class="icon">
-                            <img src="./front/assets/icons/advantageBox.svg" alt="">
-                        </div>
-                        <h2 class="advantage-title">Top Legal Experts</h2>
-                        <span class="underline"></span>
-                        <div class="box-desc">
-                            <p>
-                                We advocate for consumers and underrepresented parties, amplifying their voices and safeguarding their rights.
+                                {{ $card->description }}
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="home-advantage-box">
-                    <div class="box-inner">
-                        <div class="icon">
-                            <img src="./front/assets/icons/advantageBox.svg" alt="">
-                        </div>
-                        <h2 class="advantage-title">Competitive Pricing</h2>
-                        <span class="underline"></span>
-                        <div class="box-desc">
-                            <p>
-                                We advocate for consumers and underrepresented parties, amplifying their voices and safeguarding their rights.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="home-about">
                 <div class="home-about-box">
-                    <h2 class="smallTitle">ABOUT US</h2>
-                    <h3 class="home-about-title">As For Lawyers, It’s More Fun To Play One Than To be One</h3>
+                    <h2 class="smallTitle">{{ $include->{"name1_" . app()->getLocale()} }}</h2>
+                    <h3 class="home-about-title">{{ $include->{"text1_" . app()->getLocale()} }}</h3>
                     <span class="underline"></span>
                     <div class="box-desc">
                         <p>
-                            We advocate for consumers and underrepresented parties, amplifying their voices and safeguarding their rights.
+                            {{ $include->{"description1_" . app()->getLocale()} }}
                         </p>
-                        
                     </div>
                     <a href="about.html" class="more">Daha çox</a>
                 </div>
                 <div class="home-about-img">
-                    <img src="./front/assets/images/homeAbout.svg" alt="">
+                    <img src="{{ asset($include->image1) }}" alt="">
                 </div>
                 <div class="home-about-box">
-                    <h2 class="smallTitle">WHY CHOOSE US</h2>
-                    <h3 class="home-about-title">Lawyers Spend A Great Deal or Their Time Shoveling Smoke</h3>
+                    <h2 class="smallTitle">{{ $include->{"name2_" . app()->getLocale()} }}</h2>
+                    <h3 class="home-about-title">{{ $include->{"text2_" . app()->getLocale()} }}</h3>
                     <span class="underline"></span>
                     <div class="box-desc">
                         <p>
-                            We advocate for consumers and underrepresented parties, amplifying their voices and safeguarding their rights.
+                            {{ $include->{"description2_" . app()->getLocale()} }}
                         </p>
                     </div>
                     <a href="about.html" class="more">Daha çox</a>
@@ -143,54 +115,20 @@
                 <a href="service.html" class="more">Daha çox</a>
             </div>
             <div class="home-service-boxes">
+                @foreach($services as $service)
                 <a href="service.html" class="home-service-box">
                     <div class="icon">
                         <div class="icon-inner">
-                            <img src="./front/assets/icons/serviceBox.svg" alt="">
+                            <img src="{{ asset($service->bottom_image) }}" alt="{{ $service->title }}">
                         </div>
                     </div>
-                    <h3 class="service_name">Ümumi hüquqi xidmətlər</h3>
+                    <h3 class="service_name">{{ $service->title }}</h3>
                     <span class="underline"></span>
                 </a>
-                <a href="service.html" class="home-service-box">
-                    <div class="icon">
-                        <div class="icon-inner">
-                            <img src="./front/assets/icons/serviceBox.svg" alt="">
-                        </div>
-                    </div>
-                    <h3 class="service_name">Kommersiya və koorperativ hüquq</h3>
-                    <span class="underline"></span>
-                </a>
-                <a href="service.html" class="home-service-box">
-                    <div class="icon">
-                        <div class="icon-inner">
-                            <img src="./front/assets/icons/serviceBox.svg" alt="">
-                        </div>
-                    </div>
-                    <h3 class="service_name">Miqrasiya və əmək münasibətləri</h3>
-                    <span class="underline"></span>
-                </a>
-                <a href="service.html" class="home-service-box">
-                    <div class="icon">
-                        <div class="icon-inner">
-                            <img src="./assets/icons/serviceBox.svg" alt="">
-                        </div>
-                    </div>
-                    <h3 class="service_name">Ümumi hüquqi xidmətlər</h3>
-                    <span class="underline"></span>
-                </a>
-                <a href="service.html" class="home-service-box">
-                    <div class="icon">
-                        <div class="icon-inner">
-                            <img src="./front/assets/icons/serviceBox.svg" alt="">
-                        </div>
-                    </div>
-                    <h3 class="service_name">Məhkəmə mübahisələri</h3>
-                    <span class="underline"></span>
-                </a>
+                @endforeach
             </div>
             <div class="home-service-bg">
-                <img src="./front/assets/images/bg-img.png" alt="">
+                <img src="{{ asset('front/assets/images/bg-img.png') }}" alt="">
             </div>
         </div>
     </div>
@@ -201,159 +139,43 @@
         </div>
         <div class="home-blog-slide swiper">
             <div class="swiper-wrapper">
+                @foreach($blogs as $blog)
                 <a href="blog-detail.html" class="blog-cart swiper-slide">
                     <div class="cart-img">
-                        <img src="./front/assets/images/blogCart1.png" alt="">
+                        <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}">
                     </div>
                     <div class="cart-body">
-                        <p class="cart-date">OCT 10, 2024</p>
+                        <p class="cart-date">{{ $blog->created_at->format('M d, Y') }}</p>
                         <h3 class="cart-name">
-                            Vergi Məcəlləsinə Son Dəyişikliklər 2024
+                            {{ $blog->title }}
                         </h3>
                         <span class="underline"></span>
                     </div>
                 </a>
-                <a href="blog-detail.html" class="blog-cart swiper-slide">
-                    <div class="cart-img">
-                        <img src="./front/assets/images/blogCart2.png" alt="">
-                    </div>
-                    <div class="cart-body">
-                        <p class="cart-date">OCT 10, 2024</p>
-                        <h3 class="cart-name">
-                            Vergi Məcəlləsinə Son Dəyişikliklər 2024
-                        </h3>
-                        <span class="underline"></span>
-                    </div>
-                </a>
-                <a href="blog-detail.html" class="blog-cart swiper-slide">
-                    <div class="cart-img">
-                        <img src="./front/assets/images/blogCart3.png" alt="">
-                    </div>
-                    <div class="cart-body">
-                        <p class="cart-date">OCT 10, 2024</p>
-                        <h3 class="cart-name">
-                            Vergi Məcəlləsinə Son Dəyişikliklər 2024
-                        </h3>
-                        <span class="underline"></span>
-                    </div>
-                </a>
-                <a href="blog-detail.html" class="blog-cart swiper-slide">
-                    <div class="cart-img">
-                        <img src="./front/assets/images/blogCart1.png" alt="">
-                    </div>
-                    <div class="cart-body">
-                        <p class="cart-date">OCT 10, 2024</p>
-                        <h3 class="cart-name">
-                            Vergi Məcəlləsinə Son Dəyişikliklər 2024
-                        </h3>
-                        <span class="underline"></span>
-                    </div>
-                </a>
-                <a href="blog-detail.html" class="blog-cart swiper-slide">
-                    <div class="cart-img">
-                        <img src="./front/assets/images/blogCart2.png" alt="">
-                    </div>
-                    <div class="cart-body">
-                        <p class="cart-date">OCT 10, 2024</p>
-                        <h3 class="cart-name">
-                            Vergi Məcəlləsinə Son Dəyişikliklər 2024
-                        </h3>
-                        <span class="underline"></span>
-                    </div>
-                </a>
-                <a href="blog-detail.html" class="blog-cart swiper-slide">
-                    <div class="cart-img">
-                        <img src="./front/assets/images/blogCart3.png" alt="">
-                    </div>
-                    <div class="cart-body">
-                        <p class="cart-date">OCT 10, 2024</p>
-                        <h3 class="cart-name">
-                            Vergi Məcəlləsinə Son Dəyişikliklər 2024
-                        </h3>
-                        <span class="underline"></span>
-                    </div>
-                </a>
+                @endforeach
             </div>
         </div>
     </div>
     <div class="testimonials-container p-lr">
         <h2 class="section-title">Testimonials</h2>
         <div class="testimonials-boxes">
+            @foreach($comments as $comment)
             <div class="testimonial-box">
                 <div class="testimonial-box-head">
                     <div class="testimonial-img">
-                        <img src="./front/assets/images/testimonial-img.png" alt="">
+                        <img src="{{ asset($comment->image) }}" alt="{{ $comment->name }}">
                     </div>
                     <div class="box-head-main">
-                        <h3 class="owner-fullname">Farah Morin</h3>
-                        <p>Graphic Designer</p>
+                        <h3 class="owner-fullname">{{ $comment->name }}</h3>
+                        <p>{{ $comment->position }}</p>
                     </div>
                 </div>
                 <div class="testimonial-text">
-                    <p>Montes, ornare purus vestibulum, eget nec sem velit. Pharetra dolor auctor facilisis nunc condimentum orci massa.</p>
+                    <p>{{ $comment->comment }}</p>
                 </div>
-                <span class="testimonial-date">22.03.2021</span>
+                <span class="testimonial-date">{{ $comment->created_at->format('d.m.Y') }}</span>
             </div>
-            <div class="testimonial-box">
-                <div class="testimonial-box-head">
-                    <div class="testimonial-img">
-                        <img src="./front/assets/images/testimonial-img.png" alt="">
-                    </div>
-                    <div class="box-head-main">
-                        <h3 class="owner-fullname">Farah Morin</h3>
-                        <p>Graphic Designer</p>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    <p>Montes, ornare purus vestibulum, eget nec sem velit. Pharetra dolor auctor facilisis nunc condimentum orci massa.</p>
-                </div>
-                <span class="testimonial-date">22.03.2021</span>
-            </div>
-            <div class="testimonial-box">
-                <div class="testimonial-box-head">
-                    <div class="testimonial-img">
-                        <img src="./front/assets/images/testimonial-img.png" alt="">
-                    </div>
-                    <div class="box-head-main">
-                        <h3 class="owner-fullname">Farah Morin</h3>
-                        <p>Graphic Designer</p>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    <p>Montes, ornare purus vestibulum, eget nec sem velit. Pharetra dolor auctor facilisis nunc condimentum orci massa.</p>
-                </div>
-                <span class="testimonial-date">22.03.2021</span>
-            </div>
-            <div class="testimonial-box">
-                <div class="testimonial-box-head">
-                    <div class="testimonial-img">
-                        <img src="./front/assets/images/testimonial-img.png" alt="">
-                    </div>
-                    <div class="box-head-main">
-                        <h3 class="owner-fullname">Farah Morin</h3>
-                        <p>Graphic Designer</p>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    <p>Montes, ornare purus vestibulum, eget nec sem velit. Pharetra dolor auctor facilisis nunc condimentum orci massa.</p>
-                </div>
-                <span class="testimonial-date">22.03.2021</span>
-            </div>
-            <div class="testimonial-box">
-                <div class="testimonial-box-head">
-                    <div class="testimonial-img">
-                        <img src="./front/assets/images/testimonial-img.png" alt="">
-                    </div>
-                    <div class="box-head-main">
-                        <h3 class="owner-fullname">Farah Morin</h3>
-                        <p>Graphic Designer</p>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    <p>Montes, ornare purus vestibulum, eget nec sem velit. Pharetra dolor auctor facilisis nunc condimentum orci massa.</p>
-                </div>
-                <span class="testimonial-date">22.03.2021</span>
-            </div>
+            @endforeach
         </div>
     </div>
     <div class="online-application-container p-lr">
@@ -408,3 +230,4 @@
         </div>
     </div>
 @endsection
+
