@@ -30,7 +30,11 @@ class ContactMessageDataController extends Controller
         $message->message_az = $request->message_az;
 
         if ($request->hasFile('image')) {
-            $message->image = $request->file('image')->store('uploads/contactdata', 'public');
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            // Resmi public/uploads/contactdata klasörüne kaydet
+            $image->move(public_path('uploads/contactdata'), $imageName);
+            $message->image = 'uploads/contactdata/' . $imageName;
         }
 
         $message->save();
@@ -52,7 +56,17 @@ class ContactMessageDataController extends Controller
         $contact_messages_datum->message_az = $request->message_az;
 
         if ($request->hasFile('image')) {
-            $contact_messages_datum->image = $request->file('image')->store('uploads/contactdata', 'public');
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            
+            // Eski resmi sil
+            if ($contact_messages_datum->image && file_exists(public_path($contact_messages_datum->image))) {
+                unlink(public_path($contact_messages_datum->image));
+            }
+            
+            // Yeni resmi public/uploads/contactdata klasörüne kaydet
+            $image->move(public_path('uploads/contactdata'), $imageName);
+            $contact_messages_datum->image = 'uploads/contactdata/' . $imageName;
         }
 
         $contact_messages_datum->save();

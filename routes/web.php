@@ -263,4 +263,6 @@ Route::get('/service', [App\Http\Controllers\ServiceController::class, 'index'])
 
 Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog-detail/{id}', [App\Http\Controllers\BlogController::class, 'detail'])->name('blog.detail');
+
+Route::post('/contact', [HomeController::class, 'storeMessage'])->name('contact.store');
     

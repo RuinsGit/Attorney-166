@@ -180,25 +180,59 @@
     </div>
     <div class="online-application-container p-lr">
         <div class="online-application-main">
-            <h2 class="section-title">Online Müraciət formu</h2>
-            <form action="" class="online-application-from" method="post">
+            <h2 class="section-title">{{ $contactdata->{"message_" . app()->getLocale()} }}</h2>
+            <form action="{{ route('contact.store') }}" class="online-application-from" method="POST">
+                @csrf
                 <h3 class="form-title">Əlaqə forması</h3>
+                
+                @if(session('success'))
+                    <div class="alert alert-success" style="background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="alert alert-danger" style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <div class="form-item">
-                    <label for="">Ad</label>
-                    <input type="text" placeholder="Adınız">
+                    <label for="name">Ad</label>
+                    <input type="text" id="name" name="name" placeholder="Adınız" value="{{ old('name') }}" required>
+                    @error('name')
+                        <span style="color: #dc3545; font-size: 14px; margin-top: 5px; display: block;">{{ $message }}</span>
+                    @enderror
                 </div>
+
                 <div class="form-item">
-                    <label for="">Telefon</label>
-                    <input type="text" placeholder="+994 00 000 00 00">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email ünvanınız" value="{{ old('email') }}" required>
+                    @error('email')
+                        <span style="color: #dc3545; font-size: 14px; margin-top: 5px; display: block;">{{ $message }}</span>
+                    @enderror
                 </div>
+
                 <div class="form-item">
-                    <label for="">Sualınız</label>
-                    <textarea name="" id="" placeholder="Sualınızı yazın"></textarea>
+                    <label for="phone">Telefon</label>
+                    <input type="text" id="phone" name="phone" placeholder="+994 00 000 00 00" value="{{ old('phone') }}" required>
+                    @error('phone')
+                        <span style="color: #dc3545; font-size: 14px; margin-top: 5px; display: block;">{{ $message }}</span>
+                    @enderror
                 </div>
+
+                <div class="form-item">
+                    <label for="message">Sualınız</label>
+                    <textarea id="message" name="message" placeholder="Sualınızı yazın" required>{{ old('message') }}</textarea>
+                    @error('message')
+                        <span style="color: #dc3545; font-size: 14px; margin-top: 5px; display: block;">{{ $message }}</span>
+                    @enderror
+                </div>
+
                 <button class="send-onlineApplication" type="submit">Göndər</button>
             </form>
             <div class="online-application-img">
-                <img src="./front/assets/images/online-application.svg" alt="">
+                <img src="{{ asset($contactdata->image) }}" alt="">
             </div>
         </div>
     </div>

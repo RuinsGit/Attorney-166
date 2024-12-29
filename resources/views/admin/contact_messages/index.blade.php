@@ -65,7 +65,7 @@
                                         <td>{{ $message->message_ru }}</td>
                                         <td>
                                             @if($message->image)
-                                                <img src="{{ asset('storage/' . $message->image) }}" alt="Image" width="100">
+                                                <img src="{{ asset('/'.$message->image) }}" alt="Image" width="100">
                                             @else
                                                 <span>Görsel yoxdur</span>
                                             @endif
