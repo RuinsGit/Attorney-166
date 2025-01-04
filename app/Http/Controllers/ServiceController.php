@@ -3,19 +3,56 @@
 namespace App\Http\Controllers;
 
 use App\Models\Header;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Models\Translation;
+use App\Models\ContactMessage;
+use App\Models\ContactMessageData;
+
+
+
+
+
 
 class ServiceController extends Controller
 {
     public function index()
-    {
+
+    {   
+        $contactdata = ContactMessageData::first();
         $header = Header::first();
-        // Gerekli verileri al ve view'ı döndür
+        $contactmessage = ContactMessage::first();
+        $translations = Translation::where('status', 1)->get();
+        $services = Service::where('status', 1)->get();
+        
         $settings = [
             'service' => 'Xidmətlər',
-            // Diğer ayarlar...
         ];
 
-        return view('front.pages.service', compact('settings', 'header'));
+        return view('front.pages.service', compact('settings', 'header', 'translations', 'services', 'contactdata', 'contactmessage'));
+    }
+    public function storeMessage(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'phone' => 'required|string|max:255',
+                'message' => 'required|string',
+            ]);
+
+            ContactMessage::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'phone' => $validated['phone'],
+                'message' => $validated['message'],
+                'status' => false
+            ]);
+
+            return redirect()->back()->with('success', 'Mesajınız uğurla göndərildi!');
+        } catch (\Exception $e) {
+            \Log::error('Contact message error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Xəta baş verdi, zəhmət olmasa yenidən cəhd edin!')->withInput();
+        }
     }
 } 

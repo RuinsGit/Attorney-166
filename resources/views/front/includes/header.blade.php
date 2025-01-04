@@ -5,14 +5,10 @@
             <a href="{{ route('lang.switch', 'ru') }}" class="lang-item {{ app()->getLocale() == 'ru' ? 'active' : '' }}">RU</a>
         </div>
         <div class="header-socials">
-            <a href="" class="header-social-item">
-                <img src="./assets/icons/fb-black.svg" alt="">
-            </a>
-            <a href="" class="header-social-item">
-                <img src="./assets/icons/insta-black.svg" alt="">
-            </a>
-            <a href="" class="header-social-item">
-                <img src="./assets/icons/wp-black.svg" alt="">
-            </a>
+            @foreach($socialMedia as $social)
+                <a href="{{ $social->link }}" class="header-social-item">
+                    <img src="{{ asset('./'.$social->image) }}" alt="{{ $social->link }}">
+                </a>
+            @endforeach
         </div>
     </header>

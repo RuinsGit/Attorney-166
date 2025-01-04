@@ -9,6 +9,8 @@ class SocialMedia extends Model
     protected $table = 'social_media';
     
     protected $fillable = [
+        'name',
+        'icon',
         'image',
         'link',
         'order',

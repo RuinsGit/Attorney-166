@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class HeaderController extends Controller
 {
-        public function index()
+    public function index()
     {
         $header = Header::first();
         return view('front.includes.navbar', compact('header'));

@@ -16,6 +16,7 @@ class AboutController extends Controller
         $about = About::firstOrFail();
         $socialMedia = SocialMedia::where('status', 1)
             ->orderBy('order')
+            ->take(4)
             ->get();
 
         $leadership = Leader::all();

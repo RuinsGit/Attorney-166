@@ -15,6 +15,7 @@ class BlogController extends Controller
     {
         $socialMedia = SocialMedia::where('status', 1)
             ->orderBy('order')
+            ->take(4)
             ->get();
         $header = Header::first();
         $translations = Translation::all();
@@ -70,6 +71,7 @@ class BlogController extends Controller
         $blog = Blog::findOrFail($id);
         $socialMedia = SocialMedia::where('status', 1)
             ->orderBy('order')
+            ->take(4)
             ->get();    
         
         // Son bloglar
