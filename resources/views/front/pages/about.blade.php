@@ -1,6 +1,8 @@
 @extends('front.layouts.master')
 
-@section('title', $settings['about_us'])
+@section('title')
+    @php echo $translations->where('key', 'about_us')->first()->value; @endphp
+@endsection
 
 @section('content')
     <div class="page-direction p-lr">

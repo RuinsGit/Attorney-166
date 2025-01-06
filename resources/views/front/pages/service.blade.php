@@ -1,7 +1,9 @@
 @extends('front.layouts.master')
 
-@section('title', $settings['service'])
-
+@section('title')
+    {{ $translations->where('key', 'service_title')->first()->value }}
+@endsection
+    
 @section('content')
 <div class="page-direction p-lr">
     <a href="{{ route('home') }}" class="prev-page">{{ $translations->where('key', 'home_title_page_alt')->first()->value }}</a>

@@ -1,6 +1,8 @@
 @extends('front.layouts.master')
 
-@section('title', 'Uğurlu ödəniş!')
+@section('title')
+    @php echo $translations->where('key', 'testimonials_title_page')->first()->value; @endphp
+@endsection
 
 @section('content')
 

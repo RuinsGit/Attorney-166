@@ -1,6 +1,8 @@
 @extends('front.layouts.master')
 
-@section('title', $settings['blog'])
+@section('title')
+    @php echo $translations->where('key', 'blog_current_page')->first()->value; @endphp
+@endsection
 
 @section('css')
 <!-- <style>

@@ -1,6 +1,8 @@
 @extends('front.layouts.master')
 
-
+@section('title')
+    @php echo $translations->where('key', 'experience_title')->first()->value; @endphp
+@endsection
 
 @section('content')
 <div class="page-direction p-lr">

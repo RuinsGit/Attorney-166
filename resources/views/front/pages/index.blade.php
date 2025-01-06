@@ -1,6 +1,8 @@
 @extends('front.layouts.master')
 
-@section('title', $settings['home'])
+@section('title')
+    @php echo $translations->where('key', 'blog_prev_page')->first()->value; @endphp
+@endsection
 
 @section('content')
 <div class="home-hero p-lr">
@@ -14,7 +16,7 @@
                 <div class="hero-content">
                     <h1>{{ $hero->{"text_" . app()->getLocale()} }}</h1>
                     <p>{!! $hero->{"description_" . app()->getLocale()} !!}</p>
-                    <a href="{{route('about.index')}}" class="hero-link">Daha çox</a>
+                    <a href="{{route('about.index')}}" class="hero-link">{{ $translations->where('key', 'about_more1')->first()->value }}</a>
                 </div>
                 <div class="hero-contacts">
                     <a href="" class="hero-contact-item">
