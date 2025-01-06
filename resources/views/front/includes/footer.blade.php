@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="allRightReserved">Website by <a href="https://166tech.az/">166Tech</a> 2024. Bütün hüquqlar qorunur.</p>
+                <p class="allRightReserved">Website by <a href="https://166tech.az/">166Tech</a> {{date('Y')}}. Bütün hüquqlar qorunur.</p>
                 <div class="footer-links">
                     <a href="" class="footer-link">{{ $translations->where('key', 'privacy_policy')->first()->value }}</a>
                     <a href="" class="footer-link">{{ $translations->where('key', 'terms_conditions')->first()->value }}</a>

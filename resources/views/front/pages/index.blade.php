@@ -14,7 +14,7 @@
                 <div class="hero-content">
                     <h1>{{ $hero->{"text_" . app()->getLocale()} }}</h1>
                     <p>{!! $hero->{"description_" . app()->getLocale()} !!}</p>
-                    <a href="" class="hero-link">Daha çox</a>
+                    <a href="{{route('about.index')}}" class="hero-link">Daha çox</a>
                 </div>
                 <div class="hero-contacts">
                     <a href="" class="hero-contact-item">
@@ -89,7 +89,7 @@
                             {{ $include->{"description1_" . app()->getLocale()} }}
                         </p>
                     </div>
-                    <a href="about.html" class="more">{{ $translations->where('key', 'about_more1')->first()->value }}</a>
+                    <a href="{{route('about.index')}}" class="more">{{ $translations->where('key', 'about_more1')->first()->value }}</a>
                 </div>
                 <div class="home-about-img">
                     <img src="{{ asset($include->image1) }}" alt="">
@@ -103,7 +103,7 @@
                             {{ $include->{"description2_" . app()->getLocale()} }}
                         </p>
                     </div>
-                    <a href="about.html" class="more">{{ $translations->where('key', 'about_more2')->first()->value }}</a>
+                    <a href="{{route('about.index')}}" class="more">{{ $translations->where('key', 'about_more2')->first()->value }}</a>
                 </div>
             </div>
         </div>
@@ -112,11 +112,11 @@
         <div class="home-service-inner">
             <div class="home-service-head">
                 <h2 class="section-title">{{ $translations->where('key', 'services_title')->first()->value }}</h2>
-                <a href="service.html" class="more">{{ $translations->where('key', 'services_more')->first()->value }}</a>
+                <a href="{{route('service.index')}}" class="more">{{ $translations->where('key', 'services_more')->first()->value }}</a>
             </div>
             <div class="home-service-boxes">
                 @foreach($services as $service)
-                <a href="service.html" class="home-service-box">
+                <a href="{{route('service.index', $service->id)}}" class="home-service-box">
                     <div class="icon">
                         <div class="icon-inner">
                             <img src="{{ asset($service->bottom_image) }}" alt="{{ $service->title }}">
@@ -135,12 +135,12 @@
     <div class="home-blogs-container p-lr">
         <div class="home-blog-head">
             <h2 class="section-title">{{ $translations->where('key', 'blogs_title')->first()->value }}</h2>
-            <a href="blogs.html" class="more">{{ $translations->where('key', 'blogs_more')->first()->value }}</a>
+            <a href="{{route('blog.index')}}" class="more">{{ $translations->where('key', 'blogs_more')->first()->value }}</a>
         </div>
         <div class="home-blog-slide swiper">
             <div class="swiper-wrapper">
                 @foreach($blogs as $blog)
-                <a href="blog-detail.html" class="blog-cart swiper-slide">
+                <a href="{{ route('blog.detail', $blog->id) }}" class="blog-cart swiper-slide">
                     <div class="cart-img">
                         <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}">
                     </div>

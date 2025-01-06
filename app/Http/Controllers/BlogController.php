@@ -57,6 +57,7 @@ class BlogController extends Controller
         $blogs = $query->latest()->paginate(6)->withQueryString();
         $popularBlogs = Blog::where('is_popular', 1)->where('status', 1)->get();
         $blogTypes = BlogType::all();
+        
 
         if ($request->ajax()) {
             return view('front.pages.blog-list', compact('blogs'))->render();
@@ -79,6 +80,12 @@ class BlogController extends Controller
             ->orderBy('order')
             ->take(4)
             ->get();    
+
+            $socialMediaFooter = SocialMedia::where('status', 1)
+                    ->orderBy('id')
+                    ->skip(4)
+                    ->take(3)
+                    ->get();
         
         // Son bloglar
         $recentBlogs = Blog::where('status', 1)
@@ -102,6 +109,9 @@ class BlogController extends Controller
             ->take(6)
             ->get();
 
-        return view('front.pages.blog-detail', compact('settings', 'blog', 'recentBlogs', 'popularBlogs', 'otherBlogs', 'header', 'translations', 'socialMedia'));
+        return view('front.pages.blog-detail', compact('settings', 'blog', 'recentBlogs', 'popularBlogs', 'otherBlogs', 'header', 'translations', 'socialMedia', 'socialMediaFooter'));
     }
 } 
+
+
+
