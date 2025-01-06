@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="page-direction p-lr">
-        <a href="{{ route('home') }}" class="prev-page">Ana Səhifə</a>
+        <a href="{{ route('home') }}" class="prev-page">{{ $translations->where('key', 'home_title_page_alt')->first()->value }}</a>
         <span>/</span>                   
-        <a href="{{ route('about.index') }}" class="current-page">Haqqımızda</a>
+        <a href="{{ route('about.index') }}" class="current-page">{{ $translations->where('key', 'about_us')->first()->value }}</a>
     </div>
     <div class="about-container p-lr">
         <div class="aboutFollow">
@@ -21,10 +21,10 @@
                 @endforeach
             </div>
             <span class="line"></span>
-            <p>Bizi izləyin</p>
+            <p>{{ $translations->where('key', 'about_us_follow_us')->first()->value }}</p>
         </div>
         <div class="about-content">
-            <h1 class="pageTitle">Haqqımızda</h1>
+            <h1 class="pageTitle">{{ $translations->where('key', 'about_us')->first()->value }}</h1>
             <div class="aboutImg">
                 <img src="{{ asset($about->image) }}" alt="about image">
             </div>
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="our-staff-container p-lr">
-    <h2 class="section-title">Komandamız</h2>
+    <h2 class="section-title">{{ $translations->where('key', 'about_us_our_staff')->first()->value }}</h2>
     <div class="our-staff-carts">
         @foreach(App\Models\Leader::all() as $leader)
             <div class="our-staff-cart">
@@ -53,7 +53,7 @@
 </div>
 
 <div class="about-service-container p-lr">
-    <h2 class="section-title"><span class="line"></span><p>XİDMƏTLƏR</p></h2>
+    <h2 class="section-title"><span class="line"></span><p>{{ $translations->where('key', 'about_us_services')->first()->value }}</p></h2>
     <div class="service-slide swiper">
         <div class="swiper-wrapper">
             @foreach(App\Models\Service::where('status', true)->get() as $service)
@@ -63,10 +63,10 @@
                     </div>
                     <h3 class="cart-name">{{ $service->title }}</h3>
                     <div class="cart-desc">
-                        <p>{{ $service->description }}</p>
+                        <p>{!! $service->description !!}</p>
                     </div>
                     <div class="cart-bottom">
-                        <p>Daha çox</p>
+                        <p>{{ $translations->where('key', 'about_us_services_more')->first()->value }}</p>
                         <span class="line"></span>
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.9999 26.8801C22.0159 26.8801 26.8799 22.0161 26.8799 16.0001C26.8799 9.98412 22.0159 5.12012 15.9999 5.12012C9.98388 5.12012 5.11988 9.98412 5.11988 16.0001C5.11988 22.0161 9.98388 26.8801 15.9999 26.8801ZM15.9999 6.40012C21.3119 6.40012 25.5999 10.6881 25.5999 16.0001C25.5999 21.3121 21.3119 25.6001 15.9999 25.6001C10.6879 25.6001 6.39988 21.3121 6.39988 16.0001C6.39988 10.6881 10.6879 6.40012 15.9999 6.40012Z" fill="black"/>

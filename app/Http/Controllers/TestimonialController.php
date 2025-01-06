@@ -6,14 +6,16 @@ use App\Models\Header;
 use App\Models\Comment;
 use App\Models\Translation;
 use App\Models\CommentChat;
+
 use Illuminate\Http\Request;
+ 
 
 class TestimonialController extends Controller
 {
-    public function index()
+    public function index() 
     {
         $header = Header::first();
-        $comments = CommentChat::latest()->take(3)->get();
+        $comments = Comment::where('status', 1)->latest()->take(3)->get();
         $translations = Translation::where('status', 1)->get();
         $settings = [
             'testimonials' => 'Müştəri rəyləri'

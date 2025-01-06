@@ -29,8 +29,8 @@ class ServiceController extends Controller
             'description_az' => 'required',
             'description_en' => 'required',
             'description_ru' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'bottom_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'bottom_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048'
         ]);
 
         $data = $request->all();
@@ -40,18 +40,28 @@ class ServiceController extends Controller
             $file = $request->file('image');
             $destinationPath = public_path('uploads/services');
             $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $webpFileName = time() . '_' . $originalFileName . '.webp';
+            
+            // SVG faylı yoxlanışı
+            if ($file->getClientOriginalExtension() === 'svg') {
+                $fileName = time() . '_' . $originalFileName . '.svg';
+                $file->move($destinationPath, $fileName);
+                $data['image'] = 'uploads/services/' . $fileName;
+            } else {
+                // Digər şəkil formatları üçün webp çevirmə
+                $webpFileName = time() . '_' . $originalFileName . '.webp';
 
-            $imageResource = imagecreatefromstring(file_get_contents($file));
-            $webpPath = $destinationPath . '/' . $webpFileName;
-
-            if ($imageResource) {
                 if (!file_exists($destinationPath)) {
                     mkdir($destinationPath, 0777, true);
                 }
-                imagewebp($imageResource, $webpPath, 80);
-                imagedestroy($imageResource);
-                $data['image'] = 'uploads/services/' . $webpFileName;
+
+                $imageResource = imagecreatefromstring(file_get_contents($file));
+                $webpPath = $destinationPath . '/' . $webpFileName;
+
+                if ($imageResource) {
+                    imagewebp($imageResource, $webpPath, 80);
+                    imagedestroy($imageResource);
+                    $data['image'] = 'uploads/services/' . $webpFileName;
+                }
             }
         }
 
@@ -60,18 +70,28 @@ class ServiceController extends Controller
             $file = $request->file('bottom_image');
             $destinationPath = public_path('uploads/services');
             $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $webpFileName = time() . '_bottom_' . $originalFileName . '.webp';
+            
+            // SVG faylı yoxlanışı
+            if ($file->getClientOriginalExtension() === 'svg') {
+                $fileName = time() . '_bottom_' . $originalFileName . '.svg';
+                $file->move($destinationPath, $fileName);
+                $data['bottom_image'] = 'uploads/services/' . $fileName;
+            } else {
+                // Digər şəkil formatları üçün webp çevirmə
+                $webpFileName = time() . '_bottom_' . $originalFileName . '.webp';
 
-            $imageResource = imagecreatefromstring(file_get_contents($file));
-            $webpPath = $destinationPath . '/' . $webpFileName;
-
-            if ($imageResource) {
                 if (!file_exists($destinationPath)) {
                     mkdir($destinationPath, 0777, true);
                 }
-                imagewebp($imageResource, $webpPath, 80);
-                imagedestroy($imageResource);
-                $data['bottom_image'] = 'uploads/services/' . $webpFileName;
+
+                $imageResource = imagecreatefromstring(file_get_contents($file));
+                $webpPath = $destinationPath . '/' . $webpFileName;
+
+                if ($imageResource) {
+                    imagewebp($imageResource, $webpPath, 80);
+                    imagedestroy($imageResource);
+                    $data['bottom_image'] = 'uploads/services/' . $webpFileName;
+                }
             }
         }
 
@@ -95,8 +115,8 @@ class ServiceController extends Controller
             'description_az' => 'required',
             'description_en' => 'required',
             'description_ru' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'bottom_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'bottom_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048'
         ]);
 
         $data = $request->all();
@@ -110,18 +130,28 @@ class ServiceController extends Controller
             $file = $request->file('image');
             $destinationPath = public_path('uploads/services');
             $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $webpFileName = time() . '_' . $originalFileName . '.webp';
+            
+            // SVG faylı yoxlanışı
+            if ($file->getClientOriginalExtension() === 'svg') {
+                $fileName = time() . '_' . $originalFileName . '.svg';
+                $file->move($destinationPath, $fileName);
+                $data['image'] = 'uploads/services/' . $fileName;
+            } else {
+                // Digər şəkil formatları üçün webp çevirmə
+                $webpFileName = time() . '_' . $originalFileName . '.webp';
 
-            $imageResource = imagecreatefromstring(file_get_contents($file));
-            $webpPath = $destinationPath . '/' . $webpFileName;
-
-            if ($imageResource) {
                 if (!file_exists($destinationPath)) {
                     mkdir($destinationPath, 0777, true);
                 }
-                imagewebp($imageResource, $webpPath, 80);
-                imagedestroy($imageResource);
-                $data['image'] = 'uploads/services/' . $webpFileName;
+
+                $imageResource = imagecreatefromstring(file_get_contents($file));
+                $webpPath = $destinationPath . '/' . $webpFileName;
+
+                if ($imageResource) {
+                    imagewebp($imageResource, $webpPath, 80);
+                    imagedestroy($imageResource);
+                    $data['image'] = 'uploads/services/' . $webpFileName;
+                }
             }
         }
 
@@ -134,18 +164,28 @@ class ServiceController extends Controller
             $file = $request->file('bottom_image');
             $destinationPath = public_path('uploads/services');
             $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $webpFileName = time() . '_bottom_' . $originalFileName . '.webp';
+            
+            // SVG faylı yoxlanışı
+            if ($file->getClientOriginalExtension() === 'svg') {
+                $fileName = time() . '_bottom_' . $originalFileName . '.svg';
+                $file->move($destinationPath, $fileName);
+                $data['bottom_image'] = 'uploads/services/' . $fileName;
+            } else {
+                // Digər şəkil formatları üçün webp çevirmə
+                $webpFileName = time() . '_bottom_' . $originalFileName . '.webp';
 
-            $imageResource = imagecreatefromstring(file_get_contents($file));
-            $webpPath = $destinationPath . '/' . $webpFileName;
-
-            if ($imageResource) {
                 if (!file_exists($destinationPath)) {
                     mkdir($destinationPath, 0777, true);
                 }
-                imagewebp($imageResource, $webpPath, 80);
-                imagedestroy($imageResource);
-                $data['bottom_image'] = 'uploads/services/' . $webpFileName;
+
+                $imageResource = imagecreatefromstring(file_get_contents($file));
+                $webpPath = $destinationPath . '/' . $webpFileName;
+
+                if ($imageResource) {
+                    imagewebp($imageResource, $webpPath, 80);
+                    imagedestroy($imageResource);
+                    $data['bottom_image'] = 'uploads/services/' . $webpFileName;
+                }
             }
         }
 

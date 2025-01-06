@@ -11,7 +11,7 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Ana Səhifə</a></li>
-                                <li class="breadcrumb-item"><a href="{{ route('courses.index') }}">Tecrübə</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.courses.index') }}">Tecrübə</a></li>
                                 <li class="breadcrumb-item active">Yenilə</li>
                             </ol>
                         </div>
@@ -23,7 +23,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('courses.update', $course->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.courses.update', $course->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -116,7 +116,7 @@
 
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-primary">Yadda saxla</button>
-                                    <a href="{{ route('courses.index') }}" class="btn btn-secondary">Geri</a>
+                                    <a href="{{ route('admin.courses.index') }}" class="btn btn-secondary">Geri</a>
                                 </div>
                             </form>
                         </div>

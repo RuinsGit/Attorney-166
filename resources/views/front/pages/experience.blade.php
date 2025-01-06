@@ -1,19 +1,36 @@
 @extends('front.layouts.master')
 
-@section('title', 'Uğurlu ödəniş!')
+
 
 @section('content')
-
- 
-    
-    <div class="page-direction p-lr">
-        <a href="index.html" class="prev-page">Ana Səhifə</a>
+<div class="page-direction p-lr">
+        <a href="{{ route('home') }}" class="prev-page">{{ $translations->where('key', 'home_title_page_alt')->first()->value }}</a>
         <span>/</span>                   
-        <a href="customer_reviews.html" class="current-page">{{ $translations->where('key', 'testimonials_title_page')->first()->value }}</a>
+        <a href="{{ route('experience.index') }}" class="current-page">{{ $translations->where('key', 'experience_title')->first()->value }}</a>
 
     </div>
-    <div class="customerReview-container p-lr">
-        <h1 class="pageTitle">{{ $translations->where('key', 'testimonials_title_page')->first()->value }}</h1>
+    <div class="experience-container p-lr">
+        <h1 class="pageTitle">{{ $translations->where('key', 'experience_title')->first()->value }}</h1>
+        <div class="experience-main">
+            <div class="experience-slide swiper">
+                <div class="swiper-wrapper">
+                    @foreach($courses as $course)
+                    <div class="experience-item swiper-slide">
+                        <h2 class="experience-title">{{ $course->name }}</h2>
+                        <div class="experience-detail">
+                            <p>{{ $course->text }}</p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="swiper-scrollbar"></div>
+            </div>
+            <div class="experience-img">
+                <img src="{{ asset($course->image) }}" alt="">
+            </div>
+        </div>
+       
+
         <div class="review-container">
             <h2 class="reviewTitle">{{ $translations->where('key', 'testimonials_title_form')->first()->value }}</h2>
 
@@ -59,35 +76,8 @@
                 </button>
             </form>
         </div>
-        <div class="customerReview-main">
-            <div class="customerReview-main-left">
-                <p>{{ $translations->where('key', 'testimonials_title_page_alt')->first()->value }}</p>
-                <h2>{{ $translations->where('key', 'testimonials_title_form_form')->first()->value }}</h2>
-            </div>
-            
-            <div class="customerReview-main-right">
-                <img src="{{ asset('front/assets/images/bubble.svg') }}" alt="">
-                <div class="customerReview-boxes-main">
-                    <div class="customerReview-boxes">
-                        @foreach($comments as $comment)
-                        <div class="customerReview-box">
-                            <div class="customerReview-box-inner">
-                                <div class="own-img">
-                                    <img src="{{ asset($comment->image) }}" alt="">
-                                </div>
-                                <div class="reviewText">
-                                    <p>"{{ $comment->title }}"</p>
-                                </div>
-                                <h3 class="ownFullName">{{ $comment->comment }}</h3>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
+       
     <style>
         .alert {
             display: flex;
@@ -170,6 +160,8 @@
             animation: fadeOut 0.3s ease forwards;
         }
     </style>
-
-    
+ 
+    </div>
 @endsection
+
+

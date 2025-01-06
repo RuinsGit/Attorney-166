@@ -35,7 +35,7 @@ class HomeIncludeController extends Controller
             'name1_az' => 'required|string|max:255',
             'text1_az' => 'required|string|max:255',
             'description1_az' => 'required|string',
-            'image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image1' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'name2_az' => 'required|string|max:255',
             'text2_az' => 'required|string|max:255',
             'description2_az' => 'required|string',
@@ -49,20 +49,28 @@ class HomeIncludeController extends Controller
                 $file = $request->file('image1');
                 $destinationPath = public_path('uploads/home-includes');
                 $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $webpFileName = time() . '_' . $originalFileName . '.webp';
+                
+                // SVG faylı yoxlanışı
+                if ($file->getClientOriginalExtension() === 'svg') {
+                    $fileName = time() . '_' . $originalFileName . '.svg';
+                    $file->move($destinationPath, $fileName);
+                    $data['image1'] = 'uploads/home-includes/' . $fileName;
+                } else {
+                    // Digər şəkil formatları üçün webp çevirmə
+                    $webpFileName = time() . '_' . $originalFileName . '.webp';
 
-                $imageResource = imagecreatefromstring(file_get_contents($file));
-                $webpPath = $destinationPath . '/' . $webpFileName;
+                    if (!file_exists($destinationPath)) {
+                        mkdir($destinationPath, 0777, true);
+                    }
 
-                if (!file_exists($destinationPath)) {
-                    mkdir($destinationPath, 0777, true);
-                }
+                    $imageResource = imagecreatefromstring(file_get_contents($file));
+                    $webpPath = $destinationPath . '/' . $webpFileName;
 
-                if ($imageResource) {
-                    imagewebp($imageResource, $webpPath, 80);
-                    imagedestroy($imageResource);
-
-                    $data['image1'] = 'uploads/home-includes/' . $webpFileName;
+                    if ($imageResource) {
+                        imagewebp($imageResource, $webpPath, 80);
+                        imagedestroy($imageResource);
+                        $data['image1'] = 'uploads/home-includes/' . $webpFileName;
+                    }
                 }
             }
 
@@ -92,7 +100,7 @@ class HomeIncludeController extends Controller
             'name1_az' => 'required|string|max:255',
             'text1_az' => 'required|string|max:255',
             'description1_az' => 'required|string',
-            'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'name2_az' => 'required|string|max:255',
             'text2_az' => 'required|string|max:255',
             'description2_az' => 'required|string',
@@ -104,7 +112,7 @@ class HomeIncludeController extends Controller
             $data = $request->all();
 
             if ($request->hasFile('image1')) {
-                // Eski resmi sil
+                // Köhnə şəkli sil
                 if (file_exists(public_path($homeInclude->image1))) {
                     unlink(public_path($homeInclude->image1));
                 }
@@ -112,16 +120,28 @@ class HomeIncludeController extends Controller
                 $file = $request->file('image1');
                 $destinationPath = public_path('uploads/home-includes');
                 $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $webpFileName = time() . '_' . $originalFileName . '.webp';
+                
+                // SVG faylı yoxlanışı
+                if ($file->getClientOriginalExtension() === 'svg') {
+                    $fileName = time() . '_' . $originalFileName . '.svg';
+                    $file->move($destinationPath, $fileName);
+                    $data['image1'] = 'uploads/home-includes/' . $fileName;
+                } else {
+                    // Digər şəkil formatları üçün webp çevirmə
+                    $webpFileName = time() . '_' . $originalFileName . '.webp';
 
-                $imageResource = imagecreatefromstring(file_get_contents($file));
-                $webpPath = $destinationPath . '/' . $webpFileName;
+                    if (!file_exists($destinationPath)) {
+                        mkdir($destinationPath, 0777, true);
+                    }
 
-                if ($imageResource) {
-                    imagewebp($imageResource, $webpPath, 80);
-                    imagedestroy($imageResource);
+                    $imageResource = imagecreatefromstring(file_get_contents($file));
+                    $webpPath = $destinationPath . '/' . $webpFileName;
 
-                    $data['image1'] = 'uploads/home-includes/' . $webpFileName;
+                    if ($imageResource) {
+                        imagewebp($imageResource, $webpPath, 80);
+                        imagedestroy($imageResource);
+                        $data['image1'] = 'uploads/home-includes/' . $webpFileName;
+                    }
                 }
             }
 

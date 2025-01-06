@@ -4,9 +4,9 @@
 
 @section('content')
 <div class="page-direction p-lr">
-    <a href="{{ route('home') }}" class="prev-page">Ana Səhifə</a>
+    <a href="{{ route('home') }}" class="prev-page">{{ $translations->where('key', 'home_title_page_alt')->first()->value }}</a>
     <span>/</span>                   
-    <a href="{{ route('service.index') }}" class="current-page">Xidmətlər</a>
+    <a href="{{ route('service.index') }}" class="current-page">{{ $translations->where('key', 'service_title')->first()->value }}</a>
 </div>
 <div class="service-container p-lr">
     <h1 class="pageTitle">{{ $translations->where('key', 'service_title')->first()->value }}</h1>

@@ -35,7 +35,7 @@ class HomeCartController extends Controller
             'description_az' => 'required|string',
             'description_en' => 'nullable|string',
             'description_ru' => 'nullable|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'status' => 'required|boolean'
         ]);
 
@@ -46,20 +46,27 @@ class HomeCartController extends Controller
                 $file = $request->file('image');
                 $destinationPath = public_path('uploads/home-cart');
                 $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $webpFileName = time() . '_' . $originalFileName . '.webp';
+                
+                // SVG faylı yoxlanışı
+                if ($file->getClientOriginalExtension() === 'svg') {
+                    $fileName = time() . '_' . $originalFileName . '.svg';
+                    $file->move($destinationPath, $fileName);
+                    $data['image'] = 'uploads/home-cart/' . $fileName;
+                } else {
+                    // Digər şəkil formatları üçün webp çevirmə
+                    $webpFileName = time() . '_' . $originalFileName . '.webp';
+                    $imageResource = imagecreatefromstring(file_get_contents($file));
+                    $webpPath = $destinationPath . '/' . $webpFileName;
 
-                $imageResource = imagecreatefromstring(file_get_contents($file));
-                $webpPath = $destinationPath . '/' . $webpFileName;
+                    if (!file_exists($destinationPath)) {
+                        mkdir($destinationPath, 0777, true);
+                    }
 
-                if (!file_exists($destinationPath)) {
-                    mkdir($destinationPath, 0777, true);
-                }
-
-                if ($imageResource) {
-                    imagewebp($imageResource, $webpPath, 80);
-                    imagedestroy($imageResource);
-
-                    $data['image'] = 'uploads/home-cart/' . $webpFileName;
+                    if ($imageResource) {
+                        imagewebp($imageResource, $webpPath, 80);
+                        imagedestroy($imageResource);
+                        $data['image'] = 'uploads/home-cart/' . $webpFileName;
+                    }
                 }
             }
 
@@ -92,7 +99,7 @@ class HomeCartController extends Controller
             'description_az' => 'required|string',
             'description_en' => 'nullable|string',
             'description_ru' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'status' => 'required|boolean'
         ]);
 
@@ -101,29 +108,36 @@ class HomeCartController extends Controller
             $data = $request->all();
 
             if ($request->hasFile('image')) {
-                // Eski resmi sil
+                // Köhnə şəkli sil
                 if ($homeCart->image && File::exists(public_path($homeCart->image))) {
                     File::delete(public_path($homeCart->image));
                 }
 
                 $file = $request->file('image');
-                $destinationPath = public_path('uploads/about');
+                $destinationPath = public_path('uploads/home-cart'); // Düzəliş: about -> home-cart
                 $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $webpFileName = time() . '_' . $originalFileName . '.webp';
+                
+                // SVG faylı yoxlanışı
+                if ($file->getClientOriginalExtension() === 'svg') {
+                    $fileName = time() . '_' . $originalFileName . '.svg';
+                    $file->move($destinationPath, $fileName);
+                    $data['image'] = 'uploads/home-cart/' . $fileName;
+                } else {
+                    // Digər şəkil formatları üçün webp çevirmə
+                    $webpFileName = time() . '_' . $originalFileName . '.webp';
 
-                // Klasörün var olduğundan emin ol
-                if (!File::exists($destinationPath)) {
-                    File::makeDirectory($destinationPath, 0777, true);
-                }
+                    if (!File::exists($destinationPath)) {
+                        File::makeDirectory($destinationPath, 0777, true);
+                    }
 
-                $imageResource = imagecreatefromstring(file_get_contents($file));
-                $webpPath = $destinationPath . '/' . $webpFileName;
+                    $imageResource = imagecreatefromstring(file_get_contents($file));
+                    $webpPath = $destinationPath . '/' . $webpFileName;
 
-                if ($imageResource) {
-                    imagewebp($imageResource, $webpPath, 80);
-                    imagedestroy($imageResource);
-
-                    $data['image'] = 'uploads/about/' . $webpFileName;
+                    if ($imageResource) {
+                        imagewebp($imageResource, $webpPath, 80);
+                        imagedestroy($imageResource);
+                        $data['image'] = 'uploads/home-cart/' . $webpFileName;
+                    }
                 }
             }
 
