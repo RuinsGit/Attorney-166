@@ -32,6 +32,7 @@ use App\Http\Controllers\ExperienceController;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -284,4 +285,6 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact.index
 Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonial.store');
 
 Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('subscribe.store');
-    
+
+Route::get('/contactfront', [App\Http\Controllers\ContactController::class, 'index'])->name('contactfront');
+Route::post('/contactfront', [App\Http\Controllers\ContactController::class, 'store'])->name('contactfront.store');

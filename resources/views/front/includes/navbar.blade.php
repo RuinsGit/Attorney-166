@@ -11,7 +11,7 @@
                 <a href="{{ route('blog.index') }}" class="navbar-link {{ request()->url() == route('blog.index') ? 'active' : '' }}">{{ $header->{"blog_title_" . app()->getLocale()} }}</a>
                 <a href="{{ route('testimonial.index') }}" class="navbar-link {{ request()->routeIs('testimonial.index') ? 'active' : '' }}">{{ $header->{"testimonials_title_" . app()->getLocale()} }}</a>
                 <a href="{{ route('experience.index') }}" class="navbar-link {{ request()->routeIs('experience.index') ? 'active' : '' }}">{{ $header->{"experience_title_" . app()->getLocale()} }}</a>
-                <a href="{{ route('contact.index') }}" class="navbar-link {{ request()->routeIs('contact.index') ? 'active' : '' }}">{{ $header->{"contact_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('contactfront') }}" class="navbar-link {{ request()->routeIs('contactfront') ? 'active' : '' }}">{{ $header->{"contact_title_" . app()->getLocale()} }}</a>
             </div>
             <button class="hamburger" type="button">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

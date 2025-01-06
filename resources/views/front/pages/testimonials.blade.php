@@ -7,9 +7,9 @@
  
     
     <div class="page-direction p-lr">
-        <a href="index.html" class="prev-page">Ana Səhifə</a>
+        <a href="{{ route('home') }}" class="prev-page">{{ $translations->where('key', 'blog_prev_page')->first()->value }}</a>
         <span>/</span>                   
-        <a href="customer_reviews.html" class="current-page">{{ $translations->where('key', 'testimonials_title_page')->first()->value }}</a>
+        <a href="{{ route('testimonial.index') }}" class="current-page">{{ $translations->where('key', 'testimonials_title_page')->first()->value }}</a>
 
     </div>
     <div class="customerReview-container p-lr">

@@ -15,14 +15,33 @@ class Contact extends Model
         'address_az',
         'address_en',
         'address_ru',
-        'logo_az',
-        'logo_2_az',
-        'favicon_az',
-        'logo_en',
-        'logo_2_en',
-        'favicon_en',
-        'logo_ru',
-        'logo_2_ru',
-        'favicon_ru',
+        'logo',
+        'logo_2',
+        'favicon'
     ];
+
+    // Logo için accessor
+    public function getLogoUrlAttribute()
+    {
+        if ($this->logo && file_exists(public_path($this->logo))) {
+            return asset($this->logo);
+        }
+        return asset('front/assets/images/icons/email-icon.png');
+    }
+
+    public function getLogo2UrlAttribute()
+    {
+        if ($this->logo_2 && file_exists(public_path($this->logo_2))) {
+            return asset($this->logo_2);
+        }
+        return asset('front/assets/images/icons/location-icon.png');
+    }
+
+    public function getFaviconUrlAttribute()
+    {
+        if ($this->favicon && file_exists(public_path($this->favicon))) {
+            return asset($this->favicon);
+        }
+        return asset('front/assets/images/icons/phone-icon.png');
+    }
 } 
