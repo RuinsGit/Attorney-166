@@ -13,6 +13,8 @@ use App\Models\ContactMessage;
 use App\Models\ContactMessageData;
 use App\Models\Translation;
 use App\Models\Header;
+use App\Models\SocialMedia;
+use App\Models\Subscribe;
 
 class HomeController extends Controller
 {
@@ -30,8 +32,13 @@ class HomeController extends Controller
         $comments = Comment::where('status', 1)->latest()->get();
         $contactdata = ContactMessageData::first();
         $translations = Translation::where('status', 1)->get();
+        $socialMediaFooter = SocialMedia::where('status', 1)
+                    ->orderBy('id')
+                    ->skip(4)
+                    ->take(3)
+                    ->get();
 
-        return view('front.pages.index', compact('hero', 'settings', 'cards', 'include', 'services', 'blogs', 'comments', 'contactdata', 'translations', 'header'));
+        return view('front.pages.index', compact('hero', 'settings', 'cards', 'include', 'services', 'blogs', 'comments', 'contactdata', 'translations', 'header', 'socialMediaFooter'));
     }
 
     public function storeMessage(Request $request)
@@ -56,6 +63,30 @@ class HomeController extends Controller
         } catch (\Exception $e) {
             \Log::error('Contact message error: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Xəta baş verdi, zəhmət olmasa yenidən cəhd edin!')->withInput();
+        }
+    }
+
+    public function subscribe(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'email' => 'required|email|unique:subscribes,email'
+            ]);
+
+            Subscribe::create([
+                'email' => $validated['email'],
+                'status' => true
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Abonelik uğurla tamamlandı!'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Bir xəta baş verdi, zəhmət olmasa yenidən cəhd edin!'
+            ], 422);
         }
     }
 } 

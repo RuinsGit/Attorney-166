@@ -282,4 +282,6 @@ Route::get('/testimonials', [TestimonialController::class, 'index'])->name('test
 Route::get('/experience', [ExperienceController::class, 'index'])->name('experience.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonial.store');
+
+Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('subscribe.store');
     

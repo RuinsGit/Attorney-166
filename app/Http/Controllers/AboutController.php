@@ -20,6 +20,13 @@ class AboutController extends Controller
             ->take(4)
             ->get();
 
+            
+            $socialMediaFooter = SocialMedia::where('status', 1)
+                    ->orderBy('id')
+                    ->skip(4)
+                    ->take(3)
+                    ->get();
+
         $leadership = Leader::all();
         $header = Header::first();
         $services = Service::all();
@@ -28,6 +35,6 @@ class AboutController extends Controller
             'about_us' => 'Haqqımızda'
         ];
 
-        return view('front.pages.about', compact('about', 'socialMedia', 'settings', 'leadership', 'header', 'translations'));
+        return view('front.pages.about', compact('about', 'socialMedia', 'settings', 'leadership', 'header', 'translations', 'socialMediaFooter'    ));
     }
 } 

@@ -17,6 +17,12 @@ class BlogController extends Controller
             ->orderBy('order')
             ->take(4)
             ->get();
+
+            $socialMediaFooter = SocialMedia::where('status', 1)
+                    ->orderBy('id')
+                    ->skip(4)
+                    ->take(3)
+                    ->get();
         $header = Header::first();
         $translations = Translation::all();
         $settings = [
@@ -56,7 +62,7 @@ class BlogController extends Controller
             return view('front.pages.blog-list', compact('blogs'))->render();
         }
 
-        return view('front.pages.blog', compact('settings', 'blogs', 'popularBlogs', 'blogTypes', 'header', 'translations', 'socialMedia'));
+        return view('front.pages.blog', compact('settings', 'blogs', 'popularBlogs', 'blogTypes', 'header', 'translations', 'socialMedia', 'socialMediaFooter'));
     }
 
     public function detail($id)

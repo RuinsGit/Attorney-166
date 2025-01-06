@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Translation;
 use App\Models\ContactMessage;
 use App\Models\ContactMessageData;
-
+use App\Models\SocialMedia;
 
 
 
@@ -18,7 +18,11 @@ class ServiceController extends Controller
 {
     public function index()
 
-    {   
+    {    $socialMediaFooter = SocialMedia::where('status', 1)
+        ->orderBy('id')
+        ->skip(4)
+        ->take(3)
+        ->get();
         $contactdata = ContactMessageData::first();
         $header = Header::first();
         $contactmessage = ContactMessage::first();
@@ -29,7 +33,7 @@ class ServiceController extends Controller
             'service' => 'Xidmətlər',
         ];
 
-        return view('front.pages.service', compact('settings', 'header', 'translations', 'services', 'contactdata', 'contactmessage'));
+        return view('front.pages.service', compact('settings', 'header', 'translations', 'services', 'contactdata', 'contactmessage', 'socialMediaFooter' ));
     }
     public function storeMessage(Request $request)
     {
