@@ -44,31 +44,31 @@ use App\Http\Controllers\ExperienceController;
 |
 */
 
-// Guest middleware ile korunan login rotaları
+
 Route::middleware(['guest:admin'])->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login-handle', [AuthController::class, 'login'])->name('handle-login');
 });
 
-// Ana sayfa rotası
+
 Route::get('/', function () {
     if (auth()->check()) {
-        return redirect()->route('admin.product.index'); // Kullanıcı oturum açmışsa admin paneline yönlendir
+        return redirect()->route('admin.product.index'); 
     } else {
-        return redirect()->route('login'); // Kullanıcı oturum açmamışsa login sayfasına yönlendir
+        return redirect()->route('login'); 
     }
 });
 
-// Admin rotaları
+
 Route::prefix('admin')->name('admin.')->group(function () {
-    // Ana admin rotası - login sayfasına yönlendir
+   
     Route::get('/', function () {
-        return redirect()->route('admin.product.index'); // Admin paneline yönlendir
+        return redirect()->route('admin.product.index'); 
     });
 
-    // Diğer admin rotalarınızı buraya ekleyin
+  
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
-    // Diğer admin rotaları...
+    
 });
 
 Route::get('/admin', function () {
@@ -95,15 +95,15 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])
 Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Header Ayarları
+    
     Route::get('/header', [HeaderController::class, 'edit'])->name('header.edit');
     Route::put('/header', [HeaderController::class, 'update'])->name('header.update');
 
-    // HomeHero rotaları
+ 
     Route::get('/home-hero', [HomeHeroController::class, 'index'])->name('home-hero.index');
     Route::put('/home-hero/update', [HomeHeroController::class, 'update'])->name('home-hero.update');
 
-    // Translation rotaları
+    
     Route::resource('translations', TranslationController::class)->names([
         'index' => 'translations.index',
         'create' => 'translations.create',
@@ -126,7 +126,7 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     Route::post('/home-includes/toggle-status/{id}', [HomeIncludeController::class, 'toggleStatus'])->name('home-includes.toggle-status');
 
 
-    // SocialMedia rotaları
+    
     Route::get('/social', [SocialMediaController::class, 'index'])->name('social.index');
     Route::get('/social/create', [SocialMediaController::class, 'create'])->name('social.create');
     Route::post('/social', [SocialMediaController::class, 'store'])->name('social.store');
@@ -137,7 +137,7 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     Route::post('/social/order', [SocialMediaController::class, 'order'])->name('social.order');
     Route::post('/social/toggle-status/{id}', [SocialMediaController::class, 'toggleStatus'])->name('social.toggle-status');
 
-    // HomeCart rotaları
+   
     Route::get('/home-cart', [HomeCartController::class, 'index'])->name('home-cart.index');
     Route::get('/home-cart/create', [HomeCartController::class, 'create'])->name('home-cart.create');
     Route::post('/home-cart', [HomeCartController::class, 'store'])->name('home-cart.store');
@@ -147,7 +147,7 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     Route::get('/home-cart/status/{id}', [HomeCartController::class, 'status'])->name('home-cart.status');
     Route::post('/home-cart/order', [HomeCartController::class, 'order'])->name('home-cart.order');
 
-    // Comment rotaları
+   
     Route::get('/comment', [CommentController::class, 'index'])->name('comment.index');
     Route::get('/comment/create', [CommentController::class, 'create'])->name('comment.create');
     Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
@@ -157,7 +157,7 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     Route::post('/comment/toggle-status/{id}', [CommentController::class, 'toggleStatus'])->name('comment.toggle-status');
     Route::get('/comment/destroy/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
-    // ContactMessage rotaları
+    
     Route::get('/contact-message', [ContactMessageController::class, 'index'])->name('contact-message.index');
     Route::get('/contact-message/detail/{id}', [ContactMessageController::class, 'detail'])->name('contact-message.detail');
     Route::delete('/contact-message/{id}', [ContactMessageController::class, 'destroy'])->name('contact-message.destroy');
@@ -166,7 +166,7 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     Route::get('/contact-message/show/{id}', [ContactMessageController::class, 'show'])->name('contact-message.show');
     Route::get('/contact-message/detail/{id}', [ContactMessageController::class, 'detail'])->name('contact-message.detail');
 
-    // ContactMessageData rotaları
+    
     Route::resource('contact-messages-data', ContactMessageDataController::class)->names([
         'index' => 'contact-messages-data.index',
         'create' => 'contact-messages-data.create',
@@ -246,9 +246,8 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 
 Route::delete('/admin/courses/{id}', [CourseController::class, 'destroy'])->name('admin.courses.destroy');
 
-// Frontend comment submission route
 Route::post('/comments', [CommentChatController::class, 'store'])->name('frontend.comments.store');
-
+    
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
@@ -269,7 +268,6 @@ Route::get('/blog-detail/{id}', [App\Http\Controllers\BlogController::class, 'de
 
 Route::post('/contact', [HomeController::class, 'storeMessage'])->name('contact.store');
 
-// Dil değiştirme route'u
 Route::get('lang/{locale}', function ($locale) {
     if (in_array($locale, ['az', 'en', 'ru'])) {
         session(['locale' => $locale]);
@@ -278,7 +276,6 @@ Route::get('lang/{locale}', function ($locale) {
     return redirect()->back();
 })->name('lang.switch');
 
-// Yeni route'lar
 Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonial.index');
 Route::get('/experience', [ExperienceController::class, 'index'])->name('experience.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
