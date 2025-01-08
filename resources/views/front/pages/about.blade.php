@@ -39,20 +39,26 @@
             </div>
         </div>
     </div>
-    <div class="our-staff-container p-lr">
-    <h2 class="section-title">{{ $translations->where('key', 'about_us_our_staff')->first()->value }}</h2>
-    <div class="our-staff-carts">
-        @foreach(App\Models\Leader::all() as $leader)
-            <div class="our-staff-cart">
-                <img src="{{ asset($leader->image) }}" alt="">
-                <div class="cart-body">
-                    <h3 class="staffName">{{ $leader->name }}</h3>
-                    <p>{{ $leader->position }}</p>
-                </div>
+    @php
+        $leaders = App\Models\Leader::all();
+    @endphp
+
+    @if($leaders->isNotEmpty())
+        <div class="our-staff-container p-lr">
+            <h2 class="section-title">{{ $translations->where('key', 'about_us_our_staff')->first()->value }}</h2>
+            <div class="our-staff-carts">
+                @foreach($leaders as $leader)
+                    <div class="our-staff-cart">
+                        <img src="{{ asset($leader->image) }}" alt="">
+                        <div class="cart-body">
+                            <h3 class="staffName">{{ $leader->name }}</h3>
+                            <p>{{ $leader->position }}</p>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-        @endforeach
-    </div>
-</div>
+        </div>
+    @endif
 
 <div class="about-service-container p-lr">
     <h2 class="section-title"><span class="line"></span><p>{{ $translations->where('key', 'about_us_services')->first()->value }}</p></h2>
