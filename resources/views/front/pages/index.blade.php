@@ -255,13 +255,13 @@
                 </button>
             </div>
             <div class="mobile-menu-links">
-                <a href="index.html" class="mobile-menu-link">Ana Səhifə</a>
-                <a href="about.html" class="mobile-menu-link">Haqqımızda</a>
-                <a href="service.html" class="mobile-menu-link">Xidmətlər</a>
-                <a href="blogs.html" class="mobile-menu-link">Bloq</a>
-                <a href="customer_reviews.html" class="mobile-menu-link">Müştəri rəyləri</a>
-                <a href="experience.html" class="mobile-menu-link">Təcrübə</a>
-                <a href="contact.html" class="mobile-menu-link">Əlaqə</a>
+                <a href="{{ route('home') }}" class="mobile-menu-link">Ana Səhifə</a>
+                <a href="{{ route('about.index') }}" class="mobile-menu-link">Haqqımızda</a>
+                <a href="{{ route('service.index') }}" class="mobile-menu-link">Xidmətlər</a>
+                <a href="{{ route('blog.index') }}" class="mobile-menu-link">Bloq</a>
+                <a href="{{ route('testimonial.index') }}" class="mobile-menu-link">Müştəri rəyləri</a>
+                <a href="{{ route('experience.index') }}" class="mobile-menu-link">Təcrübə</a>
+                <a href="{{ route('contactfront') }}" class="mobile-menu-link">Əlaqə</a>
             </div>
         </div>
     </div>
