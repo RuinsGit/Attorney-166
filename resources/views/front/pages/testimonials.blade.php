@@ -188,13 +188,13 @@
                 </button>
             </div>
             <div class="mobile-menu-links">
-                <a href="{{ route('home') }}" class="mobile-menu-link">Ana Səhifə</a>
-                <a href="{{ route('about.index') }}" class="mobile-menu-link">Haqqımızda</a>
-                <a href="{{ route('service.index') }}" class="mobile-menu-link">Xidmətlər</a>
-                <a href="{{ route('blog.index') }}" class="mobile-menu-link">Bloq</a>
-                <a href="{{ route('testimonial.index') }}" class="mobile-menu-link">Müştəri rəyləri</a>
-                <a href="{{ route('experience.index') }}" class="mobile-menu-link">Təcrübə</a>
-                <a href="{{ route('contactfront') }}" class="mobile-menu-link">Əlaqə</a>
+                <a href="{{ route('home') }}" class="mobile-menu-link">{{ $header->{"homepage_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('about.index') }}" class="mobile-menu-link">{{ $header->{"about_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('service.index') }}" class="mobile-menu-link">{{ $header->{"services_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('blog.index') }}" class="mobile-menu-link">{{ $header->{"blog_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('testimonial.index') }}" class="mobile-menu-link">{{ $header->{"testimonials_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('experience.index') }}" class="mobile-menu-link">{{ $header->{"experience_title_" . app()->getLocale()} }}</a>
+                <a href="{{ route('contactfront') }}" class="mobile-menu-link">{{ $header->{"contact_title_" . app()->getLocale()} }}</a>
             </div>
         </div>
     </div>
