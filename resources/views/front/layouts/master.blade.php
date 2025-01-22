@@ -7,6 +7,7 @@
     <title>@yield('title')</title>
  
     @include('front.includes.styles')
+    <link rel="icon" href="{{ asset('uploads/'.$header->logo) }}">
 
 </head>
 
