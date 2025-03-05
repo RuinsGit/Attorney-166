@@ -14,21 +14,22 @@
     <div class="experience-container p-lr">
         <h1 class="pageTitle">{{ $translations->where('key', 'experience_title')->first()->value }}</h1>
         <div class="experience-main">
-            <div class="experience-slide swiper">
-                <div class="swiper-wrapper">
-                    @foreach($courses as $course)
-                    <div class="experience-item swiper-slide">
+            <div class="experience-items">
+                @foreach($courses as $course)
+                    <div class="experience-item" id="course-{{ $course->id }}">
                         <h2 class="experience-title">{{ $course->name }}</h2>
                         <div class="experience-detail">
                             <p>{{ $course->text }}</p>
                         </div>
                     </div>
-                    @endforeach
-                </div>
-                <div class="swiper-scrollbar"></div>
+                @endforeach
             </div>
-            <div class="experience-img">
-                <img src="{{ asset($course->image) }}" alt="">
+            <div class="experience-images">
+                @foreach($courses as $courseImage)
+                    <div class="experience-image" data-id="course-{{ $courseImage->id }}">
+                        <img src="{{ asset($courseImage->image) }}" alt="{{ $courseImage->name }}">
+                    </div>
+                @endforeach
             </div>
         </div>
        
