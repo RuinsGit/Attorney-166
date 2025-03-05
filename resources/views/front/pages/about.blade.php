@@ -65,7 +65,7 @@
     <div class="service-slide swiper">
         <div class="swiper-wrapper">
             @foreach(App\Models\Service::where('status', true)->get() as $service)
-                <a href="service.html" class="service-cart swiper-slide">
+                <a href="{{ route('service.index') }}" class="service-cart swiper-slide">
                     <div class="icon">
                         <img src="{{ asset($service->bottom_image) }}" alt="">
                     </div>
