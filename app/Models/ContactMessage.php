@@ -8,7 +8,7 @@ class ContactMessage extends Model
 {
     protected $fillable = ['name', 'email', 'phone', 'message', 'status'];
 
-    // Status için accessor
+   
     public function getStatusBadgeAttribute()
     {
         return $this->status 

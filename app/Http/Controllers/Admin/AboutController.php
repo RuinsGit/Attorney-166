@@ -21,7 +21,7 @@ class AboutController extends Controller
             $about = About::firstOrNew();
 
             if ($request->hasFile('image')) {
-                // Eski resmi sil
+                
                 if ($about->image && File::exists(public_path($about->image))) {
                     File::delete(public_path($about->image));
                 }
@@ -31,7 +31,7 @@ class AboutController extends Controller
                 $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 $webpFileName = time() . '_' . $originalFileName . '.webp';
 
-                // Klasörün var olduğundan emin ol
+                
                 if (!File::exists($destinationPath)) {
                     File::makeDirectory($destinationPath, 0777, true);
                 }

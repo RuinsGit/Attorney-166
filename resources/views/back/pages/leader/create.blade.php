@@ -173,32 +173,32 @@
         </script>
     @endif
 
-    <!-- Form submit kontrolü -->
+    
     <script>
         $(document).ready(function() {
             $('form').on('submit', function(e) {
                 let hasError = false;
                 let errorMessage = '';
 
-                // AZ tab kontrolü
+                
                 if (!$('#az input[name="name_az"]').val() || !$('#az input[name="position_az"]').val()) {
                     errorMessage += 'Azərbaycan dilində məlumatları daxil edin<br>';
                     hasError = true;
                 }
 
-                // EN tab kontrolü
+                
                 if (!$('#en input[name="name_en"]').val() || !$('#en input[name="position_en"]').val()) {
                     errorMessage += 'İngilis dilində məlumatları daxil edin<br>';
                     hasError = true;
                 }
 
-                // RU tab kontrolü
+                
                 if (!$('#ru input[name="name_ru"]').val() || !$('#ru input[name="position_ru"]').val()) {
                     errorMessage += 'Rus dilində məlumatları daxil edin<br>';
                     hasError = true;
                 }
 
-                // Şəkil kontrolü
+                
                 if (!$('input[name="image"]').val()) {
                     errorMessage += 'Şəkil seçilməlidir<br>';
                     hasError = true;

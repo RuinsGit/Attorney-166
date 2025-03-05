@@ -9,12 +9,12 @@ class CommentChat extends Model
 {
     use HasFactory;
 
-    // Tablonun hangi alanlarının doldurulabileceğini belirtin
+    
     protected $fillable = [
         'name',
         'comment',
     ];
 
-    // Eğer timestamps kullanıyorsanız, bu alanları belirtin
+    
     public $timestamps = true;
 }

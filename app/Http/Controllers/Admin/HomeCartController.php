@@ -47,13 +47,13 @@ class HomeCartController extends Controller
                 $destinationPath = public_path('uploads/home-cart');
                 $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 
-                // SVG faylı yoxlanışı
+              
                 if ($file->getClientOriginalExtension() === 'svg') {
                     $fileName = time() . '_' . $originalFileName . '.svg';
                     $file->move($destinationPath, $fileName);
                     $data['image'] = 'uploads/home-cart/' . $fileName;
                 } else {
-                    // Digər şəkil formatları üçün webp çevirmə
+                   
                     $webpFileName = time() . '_' . $originalFileName . '.webp';
                     $imageResource = imagecreatefromstring(file_get_contents($file));
                     $webpPath = $destinationPath . '/' . $webpFileName;
@@ -108,7 +108,7 @@ class HomeCartController extends Controller
             $data = $request->all();
 
             if ($request->hasFile('image')) {
-                // Köhnə şəkli sil
+               
                 if ($homeCart->image && File::exists(public_path($homeCart->image))) {
                     File::delete(public_path($homeCart->image));
                 }
@@ -117,13 +117,13 @@ class HomeCartController extends Controller
                 $destinationPath = public_path('uploads/home-cart'); // Düzəliş: about -> home-cart
                 $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 
-                // SVG faylı yoxlanışı
+                
                 if ($file->getClientOriginalExtension() === 'svg') {
                     $fileName = time() . '_' . $originalFileName . '.svg';
                     $file->move($destinationPath, $fileName);
                     $data['image'] = 'uploads/home-cart/' . $fileName;
                 } else {
-                    // Digər şəkil formatları üçün webp çevirmə
+                   
                     $webpFileName = time() . '_' . $originalFileName . '.webp';
 
                     if (!File::exists($destinationPath)) {

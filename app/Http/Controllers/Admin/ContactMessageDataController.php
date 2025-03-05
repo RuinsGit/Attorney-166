@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ContactMessageData; // Modeli güncelledik
+use App\Models\ContactMessageData; 
 use Illuminate\Http\Request;
 
 class ContactMessageDataController extends Controller
@@ -28,13 +28,13 @@ class ContactMessageDataController extends Controller
             'image' => 'nullable|image',
         ]);
 
-        $message = new ContactMessageData(); // Model ismini güncelledik
+        $message = new ContactMessageData(); 
         $message->message_az = $request->message_az;
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            // Resmi public/uploads/contactdata klasörüne kaydet
+            
             $image->move(public_path('uploads/contactdata'), $imageName);
             $message->image = 'uploads/contactdata/' . $imageName;
         }
@@ -65,12 +65,12 @@ class ContactMessageDataController extends Controller
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             
-            // Eski resmi sil
+            
             if ($contact_messages_datum->image && file_exists(public_path($contact_messages_datum->image))) {
                 unlink(public_path($contact_messages_datum->image));
             }
             
-            // Yeni resmi public/uploads/contactdata klasörüne kaydet
+            
             $image->move(public_path('uploads/contactdata'), $imageName);
             $contact_messages_datum->image = 'uploads/contactdata/' . $imageName;
         }

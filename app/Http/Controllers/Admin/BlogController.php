@@ -14,24 +14,24 @@ class BlogController extends Controller
     {
         $query = Blog::query();
 
-        // Arama işlemi
+       
         if ($request->filled('search')) {
             $query->where('title_az', 'like', '%' . $request->search . '%');
         }
 
-        // Blog türü filtreleme
+        
         if ($request->filled('blog_type_id')) {
             $query->where('blog_type_id', $request->blog_type_id);
         }
 
-        // Popüler blog filtreleme
+        
         if ($request->filled('is_popular')) {
             $query->where('is_popular', $request->is_popular);
         }
 
         $blogs = $query->latest()->paginate(10);
         $popularBlogs = Blog::where('is_popular', 1)->get();
-        $blogTypes = BlogType::all(); // Blog türlerini al
+        $blogTypes = BlogType::all(); 
 
         return view('back.pages.blog.index', compact('blogs', 'popularBlogs', 'blogTypes'));
     }
@@ -61,7 +61,7 @@ class BlogController extends Controller
 
         $data = $request->all();
 
-        // Ana resim işleme
+        
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $destinationPath = public_path('uploads/blogs');
@@ -81,7 +81,7 @@ class BlogController extends Controller
             }
         }
 
-        // Alt resim işleme
+       
         if ($request->hasFile('bottom_image')) {
             $file = $request->file('bottom_image');
             $destinationPath = public_path('uploads/blogs');
@@ -115,8 +115,7 @@ class BlogController extends Controller
 
     public function update(Request $request, Blog $blog)
     {
-        // Formdan gelen verileri kontrol et
-        // dd($request->all());
+       
 
         $request->validate([
             'title_az' => 'required',
@@ -135,7 +134,7 @@ class BlogController extends Controller
 
         $data = $request->all();
 
-        // Ana resim işleme
+       
         if ($request->hasFile('image')) {
             if ($blog->image && File::exists(public_path($blog->image))) {
                 File::delete(public_path($blog->image));
@@ -159,7 +158,7 @@ class BlogController extends Controller
             }
         }
 
-        // Alt resim işleme
+        
         if ($request->hasFile('bottom_image')) {
             if ($blog->bottom_image && File::exists(public_path($blog->bottom_image))) {
                 File::delete(public_path($blog->bottom_image));
@@ -183,10 +182,10 @@ class BlogController extends Controller
             }
         }
 
-        // Veritabanını güncelle
+        
         $blog->update($data);
         
-        // Güncellenen verileri kontrol et
+        
         $updatedBlog = Blog::find($blog->id);
        
 

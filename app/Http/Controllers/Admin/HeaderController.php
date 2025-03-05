@@ -4,36 +4,36 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Header; // Modeli ekleyin
+use App\Models\Header; 
 
 class HeaderController extends Controller
 {
     public function edit()
     {
-        $header = Header::first(); // İlk header ayarlarını al
+        $header = Header::first(); 
         return view('back.pages.header', compact('header'));
     }
 
     public function update(Request $request)
     {
-        // Eğer header yoksa yeni bir tane oluştur
+        
         $header = Header::firstOrNew();
 
-        // Logo yükleme işlemi
+       
         if ($request->hasFile('logo')) {
-            // Eski logoyu silme işlemi
+           
             if ($header->logo && file_exists(public_path('uploads/' . $header->logo))) {
                 unlink(public_path('uploads/' . $header->logo));
             }
 
-            // Yeni logoyu yükleme
+          
             $file = $request->file('logo');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->move(public_path('uploads'), $fileName); // Dosyayı doğrudan public/uploads klasörüne kaydediyoruz
-            $header->logo = $fileName; // Sadece dosya adını kaydediyoruz
+            $filePath = $file->move(public_path('uploads'), $fileName); 
+            $header->logo = $fileName; 
         }
 
-        // Diğer alanları güncelleyin
+    
         $header->fill($request->only([
             'homepage_title_az',
             'homepage_title_en',

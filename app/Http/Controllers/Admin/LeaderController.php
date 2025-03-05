@@ -103,7 +103,7 @@ class LeaderController extends Controller
             ]);
 
             if ($request->hasFile('image')) {
-                // Köhnə şəkli sil
+              
                 if ($leader->image && file_exists(public_path($leader->image))) {
                     unlink(public_path($leader->image));
                 }

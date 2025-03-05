@@ -15,6 +15,10 @@ use App\Models\Translation;
 use App\Models\Header;
 use App\Models\SocialMedia;
 use App\Models\Subscribe;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -47,21 +51,29 @@ class HomeController extends Controller
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|max:255',
-                'phone' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
                 'message' => 'required|string',
             ]);
 
-            ContactMessage::create([
+            DB::beginTransaction();
+            
+            $contactMessage = ContactMessage::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'],
                 'message' => $validated['message'],
-                'status' => false
+                'status' => false 
             ]);
+
+            
+            Mail::to('museyibli.ruhin@gmail.com')->send(new ContactMail($contactMessage));
+            
+            DB::commit();
 
             return redirect()->back()->with('success', 'Mesajınız uğurla göndərildi!');
         } catch (\Exception $e) {
-            \Log::error('Contact message error: ' . $e->getMessage());
+            DB::rollBack();
+            Log::error('Contact message error: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Xəta baş verdi, zəhmət olmasa yenidən cəhd edin!')->withInput();
         }
     }

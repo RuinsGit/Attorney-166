@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 
 class CommentChatController extends Controller
 {
-    // Yorumları listele
+    
     public function index()
     {
         $comments = CommentChat::all();
         return view('back.pages.comment_chat.index', compact('comments'));
     }
 
-    // Yorum ekleme
+    
     public function store(Request $request)
     {
         $request->validate([

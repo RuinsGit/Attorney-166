@@ -9,12 +9,12 @@ class Subscribe extends Model
 {
     use HasFactory;
 
-    // Tablonun hangi alanlarının doldurulabileceğini belirtin
+    
     protected $fillable = [
         'email',
         'status',
     ];
 
-    // Eğer timestamps kullanıyorsanız, bu alanları belirtin
+    
     public $timestamps = true;
 }

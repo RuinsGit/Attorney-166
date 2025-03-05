@@ -50,13 +50,13 @@ class HomeIncludeController extends Controller
                 $destinationPath = public_path('uploads/home-includes');
                 $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 
-                // SVG faylı yoxlanışı
+               
                 if ($file->getClientOriginalExtension() === 'svg') {
                     $fileName = time() . '_' . $originalFileName . '.svg';
                     $file->move($destinationPath, $fileName);
                     $data['image1'] = 'uploads/home-includes/' . $fileName;
                 } else {
-                    // Digər şəkil formatları üçün webp çevirmə
+                   
                     $webpFileName = time() . '_' . $originalFileName . '.webp';
 
                     if (!file_exists($destinationPath)) {
@@ -112,7 +112,7 @@ class HomeIncludeController extends Controller
             $data = $request->all();
 
             if ($request->hasFile('image1')) {
-                // Köhnə şəkli sil
+               
                 if (file_exists(public_path($homeInclude->image1))) {
                     unlink(public_path($homeInclude->image1));
                 }
@@ -121,13 +121,13 @@ class HomeIncludeController extends Controller
                 $destinationPath = public_path('uploads/home-includes');
                 $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 
-                // SVG faylı yoxlanışı
+                
                 if ($file->getClientOriginalExtension() === 'svg') {
                     $fileName = time() . '_' . $originalFileName . '.svg';
                     $file->move($destinationPath, $fileName);
                     $data['image1'] = 'uploads/home-includes/' . $fileName;
                 } else {
-                    // Digər şəkil formatları üçün webp çevirmə
+                    
                     $webpFileName = time() . '_' . $originalFileName . '.webp';
 
                     if (!file_exists($destinationPath)) {
@@ -164,7 +164,7 @@ class HomeIncludeController extends Controller
         try {
             $homeInclude = HomeInclude::findOrFail($id);
             
-            // Resmi sil
+          
             if (file_exists(public_path($homeInclude->image1))) {
                 unlink(public_path($homeInclude->image1));
             }

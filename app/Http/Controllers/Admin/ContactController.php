@@ -32,20 +32,20 @@ class ContactController extends Controller
         try {
             $data = $request->all();
 
-            // Logo dosyaları için işlem
+           
             foreach (['logo', 'logo_2', 'favicon'] as $imageField) {
                 if ($request->hasFile($imageField)) {
                     $file = $request->file($imageField);
                     $destinationPath = public_path('uploads/contact-info');
                     $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 
-                    // SVG dosyası kontrolü
+                    
                     if ($file->getClientOriginalExtension() === 'svg') {
                         $fileName = time() . '_' . $originalFileName . '.svg';
                         $file->move($destinationPath, $fileName);
                         $data[$imageField] = 'uploads/contact-info/' . $fileName;
                     } else {
-                        // Diğer resim formatları için webp dönüşümü
+                        
                         $webpFileName = time() . '_' . $originalFileName . '.webp';
 
                         if (!File::exists($destinationPath)) {
@@ -91,10 +91,10 @@ class ContactController extends Controller
             $contact = Contact::first();
             $data = $request->except(['_token', '_method']);
 
-            // Logo dosyaları için işlem
+            
             foreach (['logo', 'logo_2', 'favicon'] as $imageField) {
                 if ($request->hasFile($imageField)) {
-                    // Eski dosyayı sil
+                    
                     if ($contact->{$imageField} && File::exists(public_path($contact->{$imageField}))) {
                         File::delete(public_path($contact->{$imageField}));
                     }
@@ -103,13 +103,13 @@ class ContactController extends Controller
                     $destinationPath = public_path('uploads/contact-info');
                     $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 
-                    // SVG dosyası kontrolü
+                   
                     if ($file->getClientOriginalExtension() === 'svg') {
                         $fileName = time() . '_' . $originalFileName . '.svg';
                         $file->move($destinationPath, $fileName);
                         $data[$imageField] = 'uploads/contact-info/' . $fileName;
                     } else {
-                        // Diğer resim formatları için webp dönüşümü
+                       
                         $webpFileName = time() . '_' . $originalFileName . '.webp';
 
                         if (!File::exists($destinationPath)) {

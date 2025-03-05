@@ -20,7 +20,7 @@ class Contact extends Model
         'favicon'
     ];
 
-    // Logo için accessor
+    
     public function getLogoUrlAttribute()
     {
         if ($this->logo && file_exists(public_path($this->logo))) {

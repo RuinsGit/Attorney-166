@@ -33,7 +33,7 @@ class BlogController extends Controller
 
         $query = Blog::where('status', 1);
         
-        // Search functionality
+       
         if ($request->filled('search')) {
             $search = $request->get('search');
             $query->where(function($q) use ($search) {
@@ -45,7 +45,7 @@ class BlogController extends Controller
             });
         }
 
-        // Blog type filtering
+       
         if ($request->has('type') && $request->type != 'allBlogs') {
             $type = $request->get('type');
             if (str_starts_with($type, 'type_')) {
@@ -87,14 +87,14 @@ class BlogController extends Controller
                     ->take(3)
                     ->get();
         
-        // Son bloglar
+        
         $recentBlogs = Blog::where('status', 1)
             ->where('id', '!=', $id)
             ->latest()
             ->take(6)
             ->get();
         
-        // Popüler bloglar
+       
         $popularBlogs = Blog::where('status', 1)
             ->where('is_popular', 1)
             ->where('id', '!=', $id)
@@ -102,7 +102,7 @@ class BlogController extends Controller
             ->take(6)
             ->get();
 
-        // Diğer bloglar
+       
         $otherBlogs = Blog::where('status', 1)
             ->where('id', '!=', $id)
             ->inRandomOrder()
