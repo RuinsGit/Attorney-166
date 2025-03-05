@@ -3,7 +3,7 @@
             <div class="footer-top">
                 <div class="footer-socials">
                     @foreach($socialMediaFooter as $social)
-                        <a href="{{ $social->link }}" class="footer-social-item">
+                        <a href="{{ $social->link }}" target="_blank" class="footer-social-item">
                             <img src="{{ asset('./'.$social->image) }}" alt="{{ $social->link }}">
                         </a>
                     @endforeach

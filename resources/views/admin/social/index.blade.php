@@ -59,7 +59,7 @@
                                                    class="btn btn-primary btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <form action="{{ route('admin.social.destroy', $social->id) }}" 
+                                                <!-- <form action="{{ route('admin.social.destroy', $social->id) }}" 
                                                       method="POST" 
                                                       class="d-inline-block">
                                                     @csrf
@@ -69,7 +69,7 @@
                                                             onclick="return confirm('Silmək istədiyinizə əminsiniz?')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
-                                                </form>
+                                                </form> -->
                                             </td>
                                         </tr>
                                     @endforeach
