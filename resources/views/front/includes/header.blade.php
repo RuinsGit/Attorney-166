@@ -6,7 +6,7 @@
         </div>
         <div class="header-socials">
             @foreach($socialMedia as $social)
-                <a href="{{ $social->link }}" class="header-social-item">
+                <a href="{{ $social->link }}" target="_blank" class="header-social-item">
                     <img src="{{ asset('./'.$social->image) }}" alt="{{ $social->link }}">
                 </a>
             @endforeach
